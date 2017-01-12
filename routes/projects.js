@@ -3,13 +3,13 @@ var router = express.Router();
 var Project = require("../models/project");
 var AWS = require("aws-sdk");
 var uuid = require("uuid");
-var Datauri = require("datauri");
+var fs = require("fs");
 var multer = require("multer");
 var memoryStorage = multer.memoryStorage();
 var memoryUpload = multer({
 	storage: memoryStorage,
 	limits: {
-		filesize: 20000000,
+		filesize: 20*1024*1024,
 		files: 1
 	}
 }).single("file");
@@ -115,13 +115,27 @@ router.get("/upload/", function(req, res, next) {
 });
 
 router.post("/upload/", memoryUpload, function(req, res, next) {
+	if (!req.file) {
+		return res.status(403).send("No files uploaded");
+	}
+	var file = req.file;
+
+	if (!/^image\/(jpe?g|png|gif)$/i.test(file.mimetype)) {
+        return res.status(403).send('expect image file').end();
+	}
+	filetype = file.mimetype;
 	var s3 = new AWS.S3();
 	var bucketName = process.env.AWS_BUCKET;
-	var keyName = makeid() + "-" + req.file.originalname;
+	var keyName = makeid() + "-" + file.originalname;
+	
+	//buf = new Buffer(req.file.replace(/^data:image\/\w+;base64,/, ""),'base64');
+
+	/*
 	var datauri = new Datauri();
 
 	datauri.pipe(process.stdout);
 	datauri.encode(req.file);
+	*/
 
 	s3.createBucket({
 		Bucket: process.env.AWS_BUCKET
@@ -129,7 +143,8 @@ router.post("/upload/", memoryUpload, function(req, res, next) {
 		var params = {
 			Bucket: bucketName,
 			Key: keyName,
-			Body: datauri.content
+			Body: file.buffer,
+			ContentType: filetype
 		};
 		s3.putObject(params, function(err, data) {
 			if (err) {
