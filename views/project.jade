@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	a(href="/projects/") ⬅ Projects
+
+	h1= title
+
+	ul
+			li= "Status: " + project.status
+			li= "Start Date: " + project.startDate
+			li= "End Date: " + project.endDate
+			li= "Tags: " + project.tags
+			li= "Project URL: " + project.projectURL
+			li= "Source URL: " + project.sourceURL

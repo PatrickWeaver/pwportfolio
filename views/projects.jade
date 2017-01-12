@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	h1= title
+
+	ul
+		each project, index in projects
+			li
+				if project.slug
+					- var url = project.slug;
+					a(href= "/projects/" + url) #{project.name}
+					|  --  #{project.status}
+				else
+					span #{project.name} -- #{project.status}
+				if user
+					form(action="/projects/" + project.slug + "/delete/", method="post", class="delete-button-form")
+					button Delete
