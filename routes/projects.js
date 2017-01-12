@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
-var Project = require("../models/project");
+var Project = require("../models/Project");
+var Image = require("../models/Image");
 var AWS = require("aws-sdk");
 var uuid = require("uuid");
-var fs = require("fs");
 var multer = require("multer");
 var memoryStorage = multer.memoryStorage();
 var memoryUpload = multer({
@@ -108,124 +108,86 @@ router.post("/:projectSlug/delete/", function(req, res, next) {
 	}
 });
 
-router.get("/upload/", function(req, res, next) {
-	res.render("upload", {
-		title : "Upload image"
-	});
-});
-
-router.post("/upload/", memoryUpload, function(req, res, next) {
-	if (!req.file) {
-		return res.status(403).send("No files uploaded");
-	}
-	var file = req.file;
-
-	if (!/^image\/(jpe?g|png|gif)$/i.test(file.mimetype)) {
-        return res.status(403).send('expect image file').end();
-	}
-	filetype = file.mimetype;
-	var s3 = new AWS.S3();
-	var bucketName = process.env.AWS_BUCKET;
-	var keyName = makeid() + "-" + file.originalname;
-	
-	//buf = new Buffer(req.file.replace(/^data:image\/\w+;base64,/, ""),'base64');
-
-	/*
-	var datauri = new Datauri();
-
-	datauri.pipe(process.stdout);
-	datauri.encode(req.file);
-	*/
-
-	s3.createBucket({
-		Bucket: process.env.AWS_BUCKET
-	}, function() {
-		var params = {
-			Bucket: bucketName,
-			Key: keyName,
-			Body: file.buffer,
-			ContentType: filetype
-		};
-		s3.putObject(params, function(err, data) {
+router.get("/:projectSlug/upload/", function(req, res, next) {
+	if (req.user){
+		Project.findOne({ slug: req.params.projectSlug }, function(err, project) {
 			if (err) {
-				console.log(err);
-			} else {
-				console.log("Successfully uploaded to: " + bucketName + "/" + keyName);
-				res.send("<img src='https://" + bucketName + ".s3.amazonaws.com/" + keyName + "'>");
+				res.status(500).send(err);
+			} else if (project) {
+				res.render("upload", {
+					title: "Upload image",
+					project: project
+				});
 			}
 		});
-	});
+	} else {
+		res.redirect("/projects");
+	}
 });
 
+router.post("/:projectSlug/upload/", memoryUpload, function(req, res, next) {
+	var file = req.file;
+	var cover = false;
+	if (req.body.cover === "on") {
+		cover =  true;
+	}
+	var order = req.body.order;
+	console.log("cover: " + cover + ", order: " + order);
+	if (req.user){
+		Project.findOne({ slug: req.params.projectSlug }, function(err, project) {
+			if (err) {
+				res.status(500).send(err);
+			} else if (project) {
+				if (!req.file) {
+					return res.status(403).send("No files uploaded");
+				}
+				if (!/^image\/(jpe?g|png|gif)$/i.test(file.mimetype)) {
+			        return res.status(403).send('expect image file');
+				}
+				filetype = file.mimetype;
+				var s3 = new AWS.S3();
+				var bucketName = process.env.AWS_BUCKET;
+				var keyName = makeid() + "-" + file.originalname;
 
+				s3.createBucket({
+					Bucket: process.env.AWS_BUCKET
+				}, function() {
+					var params = {
+						Bucket: bucketName,
+						Key: keyName,
+						Body: file.buffer,
+						ContentType: filetype
+					};
+					s3.putObject(params, function(err, data) {
+						if (err) {
+							console.log(err);
+						} else {
+							imageData = {
+								project: project,
+								caption: "",
+								order: order,
+								url: "https://" + bucketName + ".s3.amazonaws.com/" + keyName
+							}
 
+							image = new Image(imageData);
+							image.save()
 
-/*
+							if (cover) {
+								project.cover = image;
+							}
+							project.images.push(image);
+							project.save();
+							res.status(201);
+							res.redirect("/projects/" + project.slug);
 
-router.post("/upload", upload.single("file"), function(req, res, next){
-   console.log("/// ----------- Upload");
-   console.log(req.file);
-   console.log("../uploads");
-   if(!req.file) {
-      return res.render("upload", {
-      	title : "Upload Image",
-      	message : {
-      		type: "danger",
-      		messages : [ "Failed uploading image. 1x001"]
-      	}
-      });
-   } else {
-    fs.rename(req.file.path, "../uploads/" + req.file.originalname, function(err){
-      if(err){
-        return res.render("upload", {
-        	title : "Upload Image",
-        	message : {
-        		type: "danger",
-        		messages : [ "Failed uploading image. 1x001"]
-        	}
-        });
-      } else {
-        //pipe to s3
-        AWS.config.update({
-        	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-        });
-        var fileBuffer = fs.readFileSync("../uploads/" + req.file.originalname);
-        console.log(fileBuffer);
-        var s3 = new AWS.S3();
-        var s3_param = {
-           Bucket: process.env.AWS_BUCKET,
-           Key: req.file.originalname,
-           //Expires: 60,
-           ContentType: req.file.mimetype,
-           ACL: "public-read",
-           Body: fileBuffer
-        };
-        s3.putObject(s3_param, function(err, data){
-          if(err){
-            console.log("S3 putObject Error: " + err);
-          } else {
-            var return_data = {
-               signed_request: data,
-               url: "https://" + process.env.AWS_BUCKET + ".s3.amazonaws.com/" + req.file.originalname
-               
-            }; 
-            console.log("return data - ////////// --------------");
-            console.log(return_data);
-            return res.render("upload", {
-            	data : return_data,
-            	title : "Upload Image : success",
-            	message : {
-             		type: 'success',
-             		messages : [ 'Uploaded Image']
-            	}
-          	});
-          }
-        });  
-      }
-    })
-   }
+						}
+					});
+				});
+			}
+		});
+	} else {
+		res.redirect("/projects");
+	}
 });
-*/
 
 module.exports = router;

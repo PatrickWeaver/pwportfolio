@@ -12,3 +12,9 @@ block content
 			li= "Tags: " + project.tags
 			li= "Project URL: " + project.projectURL
 			li= "Source URL: " + project.sourceURL
+			li
+				ul
+					each image, index in project.images
+						img(src=image.url)
+
+	a(href="/projects/" + project.slug + "/upload") Upload

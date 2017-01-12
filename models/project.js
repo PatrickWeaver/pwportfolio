@@ -11,7 +11,16 @@ var Project = new Schema({
     type: String
 	}],
 	projectURL: String,
-	sourceURL: String
+	sourceURL: String,
+	images: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Image"
+	}],
+	cover: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Image"
+	},
+	active: { type: Boolean, required: true, default: true }
 
 });
 

@@ -16,8 +16,8 @@ var LocalStrategy = require("passport-local").Strategy;
 
 
 // Models:
-var Project = require("./models/project");
-var Account = require("./models/account");
+var Project = require("./models/Project");
+var Account = require("./models/Account");
 
 
 // DB:
