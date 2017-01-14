@@ -1,7 +1,16 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		title= title
+		block css
+			include extras/css
+	body
+		a(href="/u/") U
+		br
+		a(href="/projects/") Projects
+		br
+		a(href="/projects/new/") New Project
+		br
+		block content
+		block js
+			include extras/js

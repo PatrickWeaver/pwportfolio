@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	a(href="/projects/" + project.slug) ⬅ Back to Project
+
+	h1= title
+
+	if user
+
+		form(action="/projects/" + project.slug + "/delete/yes-for-sure", method="post", class="delete-button-form")
+			input(type="submit" value="YES FOR SURE DELETE " + project.name name="submit")

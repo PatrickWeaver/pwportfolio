@@ -5,16 +5,54 @@ block content
 
 	h1= title
 
+	img(src=cover)
+	br
+	if cover
+		a(href="/projects/" + project.slug + "/remove-cover/").admin-link ✂️ Remove Cover
+
 	ul
 			li= "Status: " + project.status
-			li= "Start Date: " + project.startDate
-			li= "End Date: " + project.endDate
-			li= "Tags: " + project.tags
-			li= "Project URL: " + project.projectURL
-			li= "Source URL: " + project.sourceURL
-			li
-				ul
-					each image, index in project.images
-						img(src=image.url)
-
-	a(href="/projects/" + project.slug + "/upload") Upload
+			if project.startDate
+				li= "Start Date: " + project.startDate
+			if project.endDate
+				li= "End Date: " + project.endDate
+			if project.tags
+				li= "Tags: "
+					ul
+						each tag in project.tags
+							li.tag #{tag}
+			if project.projectURL
+				li Project URL: 
+					a(href=project.projectURL, target="_blank") #{project.projectURL}
+			if project.sourceURL
+				li Source URL: 
+					a(href=project.sourceURL, target="_blank") #{project.sourceURL}
+			if project.description
+				li Description:
+				br
+				div!= md(project.description)
+			if project.images
+				li
+					ul
+						each image, index in project.images
+							li(id="image-" + index)
+								img(src=image.url).project-image
+								p=image.caption
+								p=image.order
+								p=image._id
+								if user
+									a(href="/projects/" + project.slug + "/image/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
+									if image.cover
+										a(href="/projects/" + project.slug + "/remove-cover/").admin-link ✂️ Remove Cover
+									else
+										a(href="/projects/" + project.slug + "/image/" + image.order + "/make-cover/").admin-link 🏗 Make Cover
+	if user
+		a(href="/projects/" + project.slug + "/edit").admin-link 📝 Edit #{project.name}
+		a(href="/projects/" + project.slug + "/upload-image").admin-link ⬆ Upload Image
+		a(href="/projects/" + project.slug + "/image-order").admin-link 🔁 Change Image Order
+		a(href="/projects/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
+		a(href="/projects/" + project.slug + "/toggle/" + !project.active + "/").admin-link
+					if project.active
+						| 🔐 Deactivate
+					else
+						| 🔓 Activate

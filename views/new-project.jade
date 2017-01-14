@@ -8,10 +8,13 @@ block content
 		input(type="text", name="name")
 		label Slug:
 		input(type="text", name="slug")
+		label Description:
+		textarea(name="description")
 		label Start Date:
-		input(type="date", name="startDate")
+		//input(type="text" placeholder="Select Date..", name="startDate").flatpickr
+		input(type="date" name="startDate")
 		label End Date:
-		input(type="date", name="endDate")
+		input(type="text" placeholder="Select Date..", name="endDate").flatpickr
 		label Status:
 		input(type="text", name="status")
 		label Tags:

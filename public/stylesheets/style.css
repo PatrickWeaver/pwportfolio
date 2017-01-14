@@ -1,3 +1,5 @@
+/* Global */
+
 body {
 	font-family: "Arial", sans-serif;
   padding: 50px;
@@ -6,3 +8,66 @@ body {
 a {
   color: #00C0FF;
 }
+
+.tag {
+	display: inline-block;
+	border: 1px solid black;
+	margin: .3em;
+	padding: .15em;
+}
+
+/* Projects */
+
+.list-project {
+	margin: 2em;
+}
+
+
+/* Project */
+
+/* different for below 480px */
+.project-image {
+	max-width: 20%;
+}
+
+
+/* Admin */
+input, textarea {
+	display: block;
+}
+
+.admin-link {
+	display: inline-block;
+	margin: .5em .25em;
+}
+
+.delete {
+	color: #DF6F3F;
+}
+
+.order-image {
+	display: block;
+	margin: 2em;
+}
+
+.order-image img {
+	max-width: 400px;
+}
+
+
+@media (max-width: 960px) {
+
+	/* Global */
+
+
+
+
+	/* Projects */
+	.project-image {
+		max-width: 80%;
+	}
+
+	/* Project */
+
+
+	/* Admin */

@@ -6,15 +6,17 @@ block content
 	form( 
 		id="uploadForm" 
 		enctype="multipart/form-data" 
-		action="/projects/" + project.slug + "/upload" 
+		action="/projects/" + project.slug + "/upload-image" 
 		method="post"
 		class="col-xs-12 col-sm-offset-4 col-sm-4")
 
+		label File :
+		input(type="file" name="file")
 		label Cover?
 		input(type="checkbox" name="cover")
 		label Order:
 		input(type="number" name="order")
-		label File :
-		input(type="file" name="file")
+		label Caption:
+		textarea(name="caption")
 		br
 		input(type="submit" value="Upload Image" name="submit")

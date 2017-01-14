@@ -1,0 +1,25 @@
+li.list-project
+	if project.slug
+		- var url = project.slug;
+		a(href= "/projects/" + url) #{project.name}
+	else
+		span #{project.name}
+	|  -- 
+	if project.status
+		| #{project.status} -- 
+	if project.active
+		| Active
+	else
+		| Inactive
+	if project.tags
+		ul
+			each tag in project.tags
+				li.tag #{tag}
+	if user
+			a(href="/projects/" + project.slug + "/edit/").admin-link 📝 Edit
+			a(href="/projects/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
+			a(href="/projects/" + project.slug + "/toggle/" + !project.active + "/").admin-link
+				if project.active
+					| 🔐 Deactivate
+				else
+					| 🔓 Activate
