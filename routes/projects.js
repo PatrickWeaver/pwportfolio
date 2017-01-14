@@ -223,42 +223,6 @@ router.post("/:projectSlug/delete/yes-for-sure", function(req, res, next) {
 	}
 });
 
-router.get("/:projectSlug/image/:imageOrder/delete/", function(req, res, next) {
-	if (req.user){
-		Project.findOne({ slug: req.params.projectSlug }, function(err, project) {
-			if (err) {
-				res.status(500).send(err);
-			} else if (project) {
-				found = false;
-				var deleteId;
-				for (i = 0; i < project.images.length; i++){
-					image = project.images[i];
-					if (parseInt(image.order) === parseInt(req.params.imageOrder)) {
-						deleteId = image._id;
-					} else if (parseInt(image.order) > parseInt(req.params.imageOrder)){
-						image.order--;
-					}
-				}
-				project.images.id(deleteId).remove();
-				// There seems to be a bug here where validation throws an error for the Image that was deleted because it doesn't have an order (which is required)
-				// Calling validate() on Project somehow makes it save ok, but logs the error to the console. save() then doesn't throw (the same) error it would have if we hadn't called validate().
-				//https://github.com/Automattic/mongoose/issues/2344
-				project.validate(function(err) {console.log(err)})
-				project.save(function (err, project, numAffected) {
-					if (err) {
-						console.log(err);
-					} else {
-						res.redirect("/projects/" + req.params.projectSlug);
-					}
-				});
-				
-			}
-		});
-	} else {
-		next();
-	}
-});
-
 router.get("/:projectSlug/image/:imageOrder/make-cover", function(req,res,next) {
 	if (req.user){
 		Project.findOne({ slug: req.params.projectSlug }, function(err, project) {
@@ -422,6 +386,22 @@ router.post("/:projectSlug/upload-image/", memoryUpload, function(req, res, next
 	}
 });
 
+router.get("/:projectSlug/image/:imageOrder/", function(req, res, next) {
+	Project.findOne({ slug: req.params.projectSlug }, function(err, project){
+		if (err) {
+			res.status(500).send(err);
+		} else if (project){
+			res.render("image", {
+				title: "Image from: " + project.name,
+				project: project,
+				image: project.images[parseInt(req.params.imageOrder)]
+			});
+		} else {
+			next();
+		}
+	});
+});
+
 router.get("/:projectSlug/image-order/", function(req, res, next) {
 	if (req.user){
 		Project.findOne({ slug: req.params.projectSlug }, function(err, project) {
@@ -468,6 +448,42 @@ router.post("/:projectSlug/image-order/", function(req,res,next) {
 			}
 		});
 
+	} else {
+		next();
+	}
+});
+
+router.get("/:projectSlug/image/:imageOrder/delete/", function(req, res, next) {
+	if (req.user){
+		Project.findOne({ slug: req.params.projectSlug }, function(err, project) {
+			if (err) {
+				res.status(500).send(err);
+			} else if (project) {
+				found = false;
+				var deleteId;
+				for (i = 0; i < project.images.length; i++){
+					image = project.images[i];
+					if (parseInt(image.order) === parseInt(req.params.imageOrder)) {
+						deleteId = image._id;
+					} else if (parseInt(image.order) > parseInt(req.params.imageOrder)){
+						image.order--;
+					}
+				}
+				project.images.id(deleteId).remove();
+				// There seems to be a bug here where validation throws an error for the Image that was deleted because it doesn't have an order (which is required)
+				// Calling validate() on Project somehow makes it save ok, but logs the error to the console. save() then doesn't throw (the same) error it would have if we hadn't called validate().
+				//https://github.com/Automattic/mongoose/issues/2344
+				project.validate(function(err) {console.log(err)})
+				project.save(function (err, project, numAffected) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.redirect("/projects/" + req.params.projectSlug);
+					}
+				});
+				
+			}
+		});
 	} else {
 		next();
 	}

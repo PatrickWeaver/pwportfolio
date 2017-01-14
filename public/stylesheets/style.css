@@ -2,7 +2,7 @@
 
 body {
 	font-family: "Arial", sans-serif;
-  padding: 50px;
+  padding: 20px;
 }
 
 a {
@@ -29,6 +29,15 @@ a {
 .project-image {
 	max-width: 20%;
 }
+
+
+/* Image */
+
+.full-image {
+	max-width: 100%;
+	margin: 1em 0;
+}
+
 
 
 /* Admin */

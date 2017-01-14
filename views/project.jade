@@ -36,7 +36,8 @@ block content
 					ul
 						each image, index in project.images
 							li(id="image-" + index)
-								img(src=image.url).project-image
+								a(href="/projects/" + project.slug + "/image/" + image.order + "/")
+									img(src=image.url).project-image
 								p=image.caption
 								p=image.order
 								p=image._id

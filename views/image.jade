@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	a(href="/projects/" + project.slug + "/") ⬅ Back to Project
+
+	h1= title
+
+	img(src=image.url).full-image
+	
+	p=image.caption
+	p=image.order
+	p=image._id
+	if user
+		a(href="/projects/" + project.slug + "/image/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
