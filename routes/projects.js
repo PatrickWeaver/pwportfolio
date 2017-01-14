@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var Project = require("../models/Project");
+var Project = require(path.join(__dirname, "/models/Project"));
 var AWS = require("aws-sdk");
 var uuid = require("uuid");
 var multer = require("multer");
