@@ -245,7 +245,7 @@ router.post("/:projectSlug/delete/yes-for-sure", function(req, res, next) {
 			}
 		});
 	} else {
-		res.redirect("/projects");
+		next();
 	}
 });
 

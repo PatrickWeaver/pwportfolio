@@ -83,6 +83,29 @@ router.post("/:statusName/edit/", function(req, res, next) {
 	}
 });
 
+router.get("/:statusName/delete/", function(req, res, next) {
+	if (req.user) {
+		if (!req.params.statusName) {
+			res.status(400);
+			res.send("Name is required");
+		} else {
+			parameters = {};
+			parameters.name = req.params.statusName;
+			Status.findOne({ name: parameters.name }, function(err, status) {
+				if (err) {
+					res.status(500).send(err);
+				} else if (status) {
+					status.remove();
+					res.status(201);
+					res.redirect("/statuses/");
+				}
+			});
+		}
+	} else {
+		next();
+	}
+});
+
 router.get("/", function(req, res, next) {
 	if (req.user){
 		var query = {};
