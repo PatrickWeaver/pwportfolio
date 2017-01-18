@@ -1,8 +1,13 @@
 /* Global */
 
+* {
+
+}
+
 body {
 	font-family: "Arial", sans-serif;
   padding: 20px;
+  font-size: 200%;
 }
 
 a {
@@ -23,11 +28,14 @@ ul, li {
 	border-radius: 3px;
 }
 
+
+
 /* Projects */
 
 .projects ul.project-list {
-	width: 60%;
-	margin: 0 20%;
+	width: 98%;
+	max-width: 1000px;
+	margin: 0 auto;
 	border: 1px solid green;
 }
 
