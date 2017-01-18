@@ -9,17 +9,38 @@ a {
   color: #00C0FF;
 }
 
+ul, li {
+	list-style-type: none;
+	padding: 0;
+}
+
 .tag {
 	display: inline-block;
 	border: 1px solid black;
-	margin: .3em;
+	margin: .15em;
 	padding: .15em;
+	text-decoration: none;
+	border-radius: 3px;
 }
 
 /* Projects */
 
+.projects ul.project-list {
+	width: 60%;
+	margin: 0 20%;
+	border: 1px solid green;
+}
+
 .list-project {
 	margin: 2em;
+}
+
+.list-cover {
+	display: block;
+	max-width: 100%;
+	max-height: 10em;
+	margin: 0 auto;
+
 }
 
 
@@ -37,6 +58,13 @@ a {
 	max-width: 100%;
 	margin: 1em 0;
 }
+
+/* Statuses */
+
+.status-tag {
+	/* CSS inline */
+}
+
 
 
 
@@ -62,6 +90,14 @@ input, textarea {
 .order-image img {
 	max-width: 400px;
 }
+
+.color-demo {
+	width: 100px;
+	height: 100px;	
+	/* Background color is inline in css.jade view */
+}
+
+
 
 
 @media (max-width: 960px) {

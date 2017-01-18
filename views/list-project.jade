@@ -6,15 +6,17 @@ li.list-project
 		span #{project.name}
 	|  -- 
 	if project.status
-		| #{project.status} -- 
-	if project.active
-		| Active
-	else
-		| Inactive
+		a(href="/projects/?status=" + project.status.name).tag #{project.status.name}
 	if project.tags
 		ul
 			each tag in project.tags
-				li.tag #{tag}
+				a(href="/projects/?tags=" + tag)
+					li.tag #{tag}
+	if project.cover
+		li
+			img(src=project.cover).list-cover
+	else
+		| no cover
 	if user
 			a(href="/projects/" + project.slug + "/edit/").admin-link 📝 Edit
 			a(href="/projects/" + project.slug + "/delete/").delete.admin-link 🗑 Delete

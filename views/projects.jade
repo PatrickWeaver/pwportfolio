@@ -2,18 +2,18 @@ extends layout
 
 block content
 	h1= title
-
-	ul
-		each project, index in projects
-			if project.active
-				include list-project
-
-	if user
-		h3 Inactive Projects:
-		ul
-			each project in projects
-				if !project.active
+	div.projects
+		ul.project-list
+			each project, index in projects
+				if project.active
 					include list-project
+
+		if user
+			h3 Inactive Projects:
+			ul.project-list
+				each project in projects
+					if !project.active
+						include list-project
 
 		
 

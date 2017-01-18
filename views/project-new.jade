@@ -5,18 +5,19 @@ block content
 
 	form(action="/projects/new/", method="post", class="project-form")
 		label Name:
-		input(type="text", name="name")
+		input(type="text", name="name", onkeyup="fillSlug()")#project-name-input
 		label Slug:
-		input(type="text", name="slug")
+		input(type="text", name="slug")#project-slug-input
 		label Description:
 		textarea(name="description")
 		label Start Date:
-		//input(type="text" placeholder="Select Date..", name="startDate").flatpickr
-		input(type="date" name="startDate")
+		input(type="text" placeholder="Select Date..", name="startDate")#start-date-input.flatpickr
 		label End Date:
-		input(type="text" placeholder="Select Date..", name="endDate").flatpickr
+		input(type="text" placeholder="Select Date..", name="endDate")#end-date-input.flatpickr
 		label Status:
-		input(type="text", name="status")
+		select(name="status")
+			for status in statuses
+				option(value=status.id)=status.name
 		label Tags:
 		input(type="text", name="tags")
 		label Project URL:

@@ -1,2 +1,9 @@
-link(rel='stylesheet', href='/stylesheets/style.css')
-link(rel="stylesheet" href="/stylesheets/flatpickr.css")
+link(rel="stylesheet", href="/stylesheets/style.css")
+link(rel="stylesheet", href="/stylesheets/spectrum.css")
+link(rel="stylesheet", href="/stylesheets/flatpickr.css")
+
+if status
+	style= ".status-tag-" + status.color + " { background-color: #" + status.color + "; }"
+if statuses
+	for status in statuses
+		style= ".status-tag-" + status.color + " { background-color: #" + status.color + "; }"

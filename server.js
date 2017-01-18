@@ -7,6 +7,7 @@ var bodyParser = require("body-parser");
 
 var routes = require("./routes/index");
 var projects = require("./routes/projects");
+var statuses = require("./routes/statuses")
 var accounts = require("./routes/accounts");
 
 var mongoose = require("mongoose");
@@ -17,6 +18,7 @@ var LocalStrategy = require("passport-local").Strategy;
 
 // Models:
 var Project = require("./models/project");
+var Status = require("./models/status");
 var Account = require("./models/account");
 
 
@@ -61,6 +63,7 @@ app.use(passport.session());
 // Routes:
 app.use("/", routes);
 app.use("/projects/", projects);
+app.use("/statuses/", statuses);
 app.use("/u/", accounts);
 
 passport.use(new LocalStrategy(Account.authenticate()));

@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h1 New Status
+
+	form(action="/statuses/new/", method="post", class="status-form")
+		label Name:
+		input(type="text", name="name")
+		br
+		label Color:
+		<input class="jscolor" value="000000" name="color">
+		br
+		br
+		button(type=submit) Submit

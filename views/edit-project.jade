@@ -5,9 +5,9 @@ block content
 
 	form(action="/projects/" + project.slug + "/edit/", method="post", class="project-form")
 		label Name:
-		input(type="text", name="name", value=project.name)
+		input(type="text", name="name", value=project.name, onkeyup="fillSlug()")#project-name-input
 		label Slug:
-		input(type="text", name="slug", value=project.slug)
+		input(type="text", name="slug", value=project.slug)#project-slug-input
 		label Description:
 		textarea(name="description")=project.description
 		label Start Date:

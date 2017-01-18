@@ -1,12 +1,13 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var Status = require("./status")
 
 var Image = new Schema({
-		order: {type: Number, required: true },
-		cover: Boolean,
-		caption: String,
-		url: String
-	})
+	order: { type: Number, required: true },
+	cover: Boolean,
+	caption: String,
+	url: String
+})
 
 var Project = new Schema({
 	name: { type: String, required: true, unique: true },
@@ -14,7 +15,7 @@ var Project = new Schema({
 	description: String,
 	startDate: Date,
 	endDate: Date,
-	status: String,
+	status: {type: Schema.Types.ObjectId, ref: "Status"},
 	tags: [{
     type: String
 	}],

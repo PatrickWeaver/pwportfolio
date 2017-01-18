@@ -18,7 +18,7 @@ checkSlug = function(slug) {
 	return newSlug;
 }
 
-checkDates = function(req, res, aDate) {
+checkDates = function(aDate) {
 	if (aDate){
 		newDate = new Date(String(aDate));
 	} else {
@@ -29,8 +29,7 @@ checkDates = function(req, res, aDate) {
 		if (newDate.getDate() + 1) {
 			aDate = newDate;
 		} else {
-			res.send("Provide Valid Start Date: " + newDate + " ** " + newDate.getDate());
-			return;
+			return false;
 		}
 		aDate = newDate;
 	} else {
@@ -82,8 +81,8 @@ checkProject = function(projectTemplate){
 	projectTemplate.slug = checkSlug(projectTemplate.slug);
 
 	// Make sure Dates are valid:
-	projectTemplate.startDate = checkDates(req, res, projectTemplate.startDate);
-	projectTemplate.endDate = checkDates(req, res, projectTemplate.endDate);
+	projectTemplate.startDate = checkDates(projectTemplate.startDate);
+	projectTemplate.endDate = checkDates(projectTemplate.endDate);
 
 	// Separate tags into array. Tags are separated using incrementor characters, spaces are ok in the middle of tags, but not at the beginning or the end:
 	projectTemplate.tags = tagify(projectTemplate.tags);
@@ -91,4 +90,28 @@ checkProject = function(projectTemplate){
 	// Format projectUrl and sourceUrl correctly
 	projectTemplate.projectURL = formatURL(projectTemplate.projectURL);
 	projectTemplate.sourceURL = formatURL(projectTemplate.sourceURL);
+	return projectTemplate;
 }
+
+
+checkSameOrder = function(taken, order, max) {
+	var staticMax = max;
+	var isMax = false;
+	if (taken.indexOf(order) != -1){
+		if (order === max){
+			console.log("Taken: " + taken + ", Order: " + order + " MAX!");
+			isMax = true;
+			order --;
+			return checkSameOrder(taken, order, order);
+		} else {
+			order++
+			return checkSameOrder(taken, order, staticMax);
+		}
+		
+	} else {
+		taken.push(order);
+		return order;
+	}
+}
+
+
