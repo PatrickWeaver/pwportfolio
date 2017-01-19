@@ -54,6 +54,22 @@ ul, li {
 
 /* Project */
 
+.project-view-project-content {
+
+}
+
+.project-view-project-content h1 {
+}
+
+.project-view-project-content img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.project-view-project-cover {
+	max-height: 10em;
+}
+
 /* different for below 480px */
 .project-image {
 	max-width: 20%;
@@ -103,6 +119,13 @@ input, textarea {
 	width: 100px;
 	height: 100px;	
 	/* Background color is inline in css.jade view */
+}
+
+
+/* Error: */
+
+.error {
+	font-size: 50%;
 }
 
 

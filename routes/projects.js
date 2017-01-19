@@ -142,12 +142,19 @@ router.get("/:projectSlug/edit/", function(req, res, next) {
 			if (err) {
 				res.status(500).send(err);
 			} else if (project) {
+				Status.find(function(err, statuses) {
+					if (err) {
+						res.status(500).send(err);
+					} else {
 
-				res.render("edit-project", {
-					user: req.user,
-					title: "📝 Edit: " + project.name,
-					project: project
-				})
+						res.render("edit-project", {
+							user: req.user,
+							title: "📝 Edit: " + project.name,
+							project: project,
+							statuses: statuses
+						})
+					}
+				});
 			}
 		});
 	} else {
@@ -173,18 +180,12 @@ router.post("/:projectSlug/edit/", function(req, res, next) {
 		} else {
 			projectTemplate = checkProject(req.body);
 
-			Project.findOneAndUpdate({ slug: req.params.projectSlug }, projectTemplate, { new: false }, function(err, project) {
+			Project.findOneAndUpdate({ slug: req.params.projectSlug }, projectTemplate, { new: true }, function(err, project) {
 				if (err) {
 					res.status(500).send(err);
 				} else if (project) {
 					res.status(201);
-					res.render("project", {
-						title: project.name,
-						user: req.user,
-						project: project,
-						cover: cover,
-						md: md
-					});
+					res.redirect("/projects/" + project.slug + "/")
 				}
 			});
 		}

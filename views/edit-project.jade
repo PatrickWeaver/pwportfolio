@@ -11,11 +11,13 @@ block content
 		label Description:
 		textarea(name="description")=project.description
 		label Start Date:
-		input(type="text" placeholder="Select Date..", name="endDate",  value=project.startDate).flatpickr
+		input(type="text" placeholder="Select Date..", name="startDate",  value=project.startDate).flatpickr
 		label End Date:
 		input(type="text" placeholder="Select Date..", name="endDate", value=project.endDate).flatpickr
 		label Status:
-		input(type="text", name="status", value=project.status)
+			select(name="status")
+				for status in statuses
+					option(value=status.id)=status.name
 		label Tags:
 		input(type="text", name="tags", value=project.tags)
 		label Project URL:
