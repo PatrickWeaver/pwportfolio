@@ -5,16 +5,17 @@ html
 		block css
 			include extras/css
 	body
-		a(href="/u/") U
-		br
-		a(href="/projects/") Projects
-		|  // 
-		a(href="/projects/new/") New Project
-		br
-		a(href="/statuses/") Statuses
-		|  // 
-		a(href="/statuses/new/") New Status
-		br
+		if user
+			a(href="/u/") U
+			br
+			a(href="/projects/") Projects
+			|  // 
+			a(href="/projects/new/") New Project
+			br
+			a(href="/statuses/") Statuses
+			|  // 
+			a(href="/statuses/new/") New Status
+			br
 		block content
 		block js
 			include extras/js

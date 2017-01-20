@@ -7,7 +7,7 @@
 body {
 	font-family: "Arial", sans-serif;
   padding: 20px;
-  font-size: 200%;
+  font-size: 150%;
 }
 
 a {
@@ -17,6 +17,10 @@ a {
 ul, li {
 	list-style-type: none;
 	padding: 0;
+}
+
+h3 {
+	margin: .5em 0;
 }
 
 .tag {
@@ -40,7 +44,7 @@ ul, li {
 }
 
 .list-project {
-	margin: 2em;
+	margin: 1em 3% 3em;
 }
 
 .list-cover {
@@ -49,6 +53,10 @@ ul, li {
 	max-height: 10em;
 	margin: 0 auto;
 
+}
+
+.project-status {
+	margin: .5em 0;
 }
 
 

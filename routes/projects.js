@@ -19,6 +19,8 @@ var validate = require("../helpers/validate");
 var general = require("../helpers/general");
 var md = require("marked");
 var imageRoutes = require("./images");
+var moment = require("moment");
+moment().format();
 
 router.use("/:projectSlug/images/", imageRoutes);
 var imageRouter = express.Router({mergeParams: true});
@@ -125,7 +127,8 @@ router.get("/:projectSlug", function(req, res, next) {
 					user: req.user,
 					project: project,
 					cover: cover,
-					md: md
+					md: md,
+					moment: moment
 				});
 			} else {
 				next();

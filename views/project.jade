@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
 	a(href="/projects/") ⬅ Projects
 
 	div.project-view-project-content
@@ -16,9 +17,19 @@ block content
 				li= "Status: "
 					a(href="/projects/?status=" + project.status.name).tag #{project.status.name}
 				if project.startDate
-					li= "Start Date: " + project.startDate
-				if project.endDate
-					li= "End Date: " + project.endDate
+					li
+						if moment() >= project.startDate
+							|Started: 
+						else
+							|Scheduled to Start: 
+						|#{moment(project.startDate).format("MMM YYYY")}
+					if project.endDate
+						li
+							if moment() >= project.endDate
+								|Ended: 
+							else
+								|Scheduled to End: 
+							|#{moment(project.endDate).format("MMM YYYY")}
 				if project.tags
 					li
 						ul
@@ -26,16 +37,17 @@ block content
 								if tag != ""
 									a(href="/projects/?tags=" + tag)
 										li.tag #{tag}
+				br
 				if project.projectURL
 					li Project URL: 
 						a(href=project.projectURL, target="_blank")= (project.projectURL).substring((project.projectURL).indexOf("//") + 2)
 				if project.sourceURL
 					li Source URL: 
 						a(href=project.sourceURL, target="_blank")= (project.sourceURL).substring((project.sourceURL).indexOf("//") + 2)
+				br
 				if project.description
 					li Description:
-					br
-					div!= md(project.description)
+						div!= md(project.description)
 				if project.images
 					li
 						ul

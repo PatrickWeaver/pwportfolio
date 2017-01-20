@@ -1,30 +1,33 @@
 li.list-project
 	ul
-		if project.slug
-			- var url = project.slug;
-			a(href= "/projects/" + url) #{project.name}
-		else
-			span #{project.name}
-		|  -- 
+		li
+			if project.slug
+				- var url = project.slug;
+				a(href= "/projects/" + url)
+					h3 #{project.name}
+			else
+				span #{project.name}
 		if project.status
-			a(href="/projects/?status=" + project.status.name).tag #{project.status.name}
+			li.project-status
+				a(href="/projects/?status=" + project.status.name).tag #{project.status.name}
 		if project.tags
-			ul
-				each tag in project.tags
-					if tag != ""
-						a(href="/projects/?tags=" + tag)
-							li.tag #{tag}
-		if project.cover
 			li
-				img(src=project.cover).list-cover
-		else
-			| no cover
-		if user
-			li
-				a(href="/projects/" + project.slug + "/edit/").admin-link 📝 Edit
-				a(href="/projects/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
-				a(href="/projects/" + project.slug + "/toggle/" + !project.active + "/").admin-link
-					if project.active
-						| 🔐 Deactivate
-					else
-						| 🔓 Activate
+				ul
+					each tag in project.tags
+						if tag != ""
+							a(href="/projects/?tags=" + tag)
+								li.tag #{tag}
+			if project.cover
+				li
+					img(src=project.cover).list-cover
+			else
+				| no cover
+			if user
+				li
+					a(href="/projects/" + project.slug + "/edit/").admin-link 📝 Edit
+					a(href="/projects/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
+					a(href="/projects/" + project.slug + "/toggle/" + !project.active + "/").admin-link
+						if project.active
+							| 🔐 Deactivate
+						else
+							| 🔓 Activate
