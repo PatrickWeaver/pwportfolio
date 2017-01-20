@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-	a(href="/projects/") ⬅ Projects
+	a(href="/") ⬅ Projects
 
 	div.project-view-project-content
 
@@ -11,11 +11,11 @@ block content
 		img(src=cover).project-view-project-cover
 		br
 		if cover
-			a(href="/projects/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
+			a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
 
 		ul
 				li= "Status: "
-					a(href="/projects/?status=" + project.status.name).tag #{project.status.name}
+					a(href="/?status=" + project.status.name).tag #{project.status.name}
 				if project.startDate
 					li
 						if moment() >= project.startDate
@@ -35,7 +35,7 @@ block content
 						ul
 							each tag in project.tags
 								if tag != ""
-									a(href="/projects/?tags=" + tag)
+									a(href="/?tags=" + tag)
 										li.tag #{tag}
 				br
 				if project.projectURL
@@ -53,24 +53,25 @@ block content
 						ul
 							each image, index in project.images
 								li(id="image-" + index)
-									a(href="/projects/" + project.slug + "/images/" + image.order + "/view/")
+									a(href="/" + project.slug + "/images/" + image.order + "/view/")
 										img(src=image.url).project-image
 									p=image.caption
 									if user
-										p=image.order
-										p=image._id
+										div.admin-image-details
+											p=image.order
+											p=image._id
 									if user
-										a(href="/projects/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
+										a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
 										if image.cover
-											a(href="/projects/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
+											a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
 										else
-											a(href="/projects/" + project.slug + "/images/" + image.order + "/make-cover/").admin-link 🏗 Make Cover
+											a(href="/" + project.slug + "/images/" + image.order + "/make-cover/").admin-link 🏗 Make Cover
 		if user
-			a(href="/projects/" + project.slug + "/edit/").admin-link 📝 Edit #{project.name}
-			a(href="/projects/" + project.slug + "/images/upload/").admin-link ⬆ Upload Image
-			a(href="/projects/" + project.slug + "/images/order/").admin-link 🔁 Change Image Order
-			a(href="/projects/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
-			a(href="/projects/" + project.slug + "/toggle/" + !project.active + "/").admin-link
+			a(href="/" + project.slug + "/edit/").admin-link 📝 Edit #{project.name}
+			a(href="/" + project.slug + "/images/upload/").admin-link ⬆ Upload Image
+			a(href="/" + project.slug + "/images/order/").admin-link 🔁 Change Image Order
+			a(href="/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
+			a(href="/" + project.slug + "/toggle/" + !project.active + "/").admin-link
 						if project.active
 							| 🔐 Deactivate
 						else

@@ -55,7 +55,7 @@ h3 {
 
 }
 
-.project-status {
+li.list {
 	margin: .5em 0;
 }
 
@@ -127,6 +127,10 @@ input, textarea {
 	width: 100px;
 	height: 100px;	
 	/* Background color is inline in css.jade view */
+}
+
+.admin-image-details {
+	font-size: 50%;
 }
 
 

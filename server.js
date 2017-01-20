@@ -61,8 +61,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes:
-app.use("/", routes);
-app.use("/projects/", projects);
+//app.use("/", routes);
+app.use("/", projects);
 app.use("/statuses/", statuses);
 app.use("/u/", accounts);
 

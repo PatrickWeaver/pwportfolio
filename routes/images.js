@@ -37,7 +37,7 @@ imageRouter.get("/:imageOrder/make-cover", function(req,res,next) {
 						console.log(err);
 						next();
 					} else {
-						res.redirect("/projects/" + req.params.projectSlug);
+						res.redirect("/" + req.params.projectSlug);
 					}
 				});
 			}
@@ -62,7 +62,7 @@ imageRouter.get("/remove-cover/", function(req,res,next) {
 						console.log(err);
 						next();
 					} else {
-						res.redirect("/projects/" + req.params.projectSlug);
+						res.redirect("/" + req.params.projectSlug);
 					}
 				});
 			}
@@ -86,7 +86,7 @@ imageRouter.get("/upload/", function(req, res, next) {
 			}
 		});
 	} else {
-		res.redirect("/projects");
+		res.redirect("/");
 	}
 });
 
@@ -166,7 +166,7 @@ imageRouter.post("/upload/", memoryUpload, function(req, res, next) {
 									res.status(500).send(err);
 								} else {
 									res.status(201);
-									res.redirect("/projects/" + project.slug);
+									res.redirect("/" + project.slug);
 								}
 							});
 
@@ -176,7 +176,7 @@ imageRouter.post("/upload/", memoryUpload, function(req, res, next) {
 			}
 		});
 	} else {
-		res.redirect("/projects");
+		res.redirect("/");
 	}
 });
 
@@ -227,7 +227,7 @@ imageRouter.post("/order/", function(req,res,next) {
 						console.log(err);
 						next();
 					} else {
-						res.redirect("/projects/" + req.params.projectSlug);
+						res.redirect("/" + req.params.projectSlug);
 					}
 				});
 			}
@@ -282,7 +282,7 @@ imageRouter.get("/:imageOrder/delete/", function(req, res, next) {
 					if (err) {
 						console.log(err);
 					} else {
-						res.redirect("/projects/" + req.params.projectSlug);
+						res.redirect("/" + req.params.projectSlug);
 					}
 				});
 				

@@ -3,7 +3,7 @@ extends layout
 block content
 	h1=title
 
-	form(action="/projects/" + project.slug + "/edit/", method="post", class="project-form")
+	form(action="/" + project.slug + "/edit/", method="post", class="project-form")
 		label Name:
 		input(type="text", name="name", value=project.name, onkeyup="fillSlug()")#project-name-input
 		label Slug:

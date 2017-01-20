@@ -1,32 +1,35 @@
 li.list-project
 	ul
-		li
+		li.list
 			if project.slug
 				- var url = project.slug;
-				a(href= "/projects/" + url)
+				a(href= "/" + url)
 					h3 #{project.name}
 			else
 				span #{project.name}
 		if project.status
-			li.project-status
-				a(href="/projects/?status=" + project.status.name).tag #{project.status.name}
+			li.project-status.list
+				a(href="/?status=" + project.status.name).tag #{project.status.name} 
+		if project.startDate
+			li.list= moment(project.startDate).format("YYYY")
+				if project.endDate
+					if String(moment(project.startDate).format("YYYY")) != String(moment(project.endDate).format("YYYY"))
+						| - #{moment(project.endDate).format("YYYY")}
 		if project.tags
-			li
+			li.list
 				ul
 					each tag in project.tags
 						if tag != ""
-							a(href="/projects/?tags=" + tag)
+							a(href="/?tags=" + tag)
 								li.tag #{tag}
 			if project.cover
-				li
+				li.list
 					img(src=project.cover).list-cover
-			else
-				| no cover
 			if user
-				li
-					a(href="/projects/" + project.slug + "/edit/").admin-link 📝 Edit
-					a(href="/projects/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
-					a(href="/projects/" + project.slug + "/toggle/" + !project.active + "/").admin-link
+				li.list
+					a(href="/" + project.slug + "/edit/").admin-link 📝 Edit
+					a(href="/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
+					a(href="/" + project.slug + "/toggle/" + !project.active + "/").admin-link
 						if project.active
 							| 🔐 Deactivate
 						else

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	a(href="/projects/" + project.slug + "/") ⬅ Back to Project
+	a(href="/" + project.slug + "/") ⬅ Back to Project
 
 	h1= title
 
@@ -11,4 +11,4 @@ block content
 	p=image.order
 	p=image._id
 	if user
-		a(href="/projects/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
+		a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image

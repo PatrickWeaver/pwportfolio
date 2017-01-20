@@ -2,6 +2,14 @@ extends layout
 
 block content
 	h1= title
+	h3 Filter by status:
+
+	h3 Filter by tag:
+	ul
+		each tag in tags
+			if tag != ""
+				a(href="/?tags=" + tag[0])
+					li.tag #{tag[0]}
 	div.projects
 		ul.project-list
 			each project, index in projects

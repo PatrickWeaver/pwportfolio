@@ -3,7 +3,7 @@ extends layout
 block content
 	h1 New Project
 
-	form(action="/projects/new/", method="post", class="project-form")
+	form(action="/new/", method="post", class="project-form")
 		label Name:
 		input(type="text", name="name", onkeyup="fillSlug()")#project-name-input
 		label Slug:

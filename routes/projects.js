@@ -44,6 +44,7 @@ router.get("/", function(req, res, next) {
 			res.status(500).send(err);
 		} else {
 			var returnProjects = [];
+			tags = [];
 			projects.forEach(function(project, index, array) {
 				pushProject = function(){
 					cover = findCover(project);
@@ -58,11 +59,46 @@ router.get("/", function(req, res, next) {
 				} else {
 					pushProject();
 				}
+				for (t = 0; t < project.tags.length; t++){
+					push = true;
+					for (i in tags){
+						if (tags[i][0] === project.tags[t]){
+							tags[i][1]++
+							push = false;
+						}
+					}
+					if (push) {
+						if (project.tags[t] != "") {
+							tags.push([project.tags[t], 1]);
+						}
+					}
+				}
 			});
+
+			tags.sort(function(a,b) {
+				if (a[0] < b[0]){
+					return -1
+				}
+				if (a[0] > b[0]) {
+					return 1;
+				}
+
+				return 0;
+
+			});
+
+			tags.sort(function(a, b) {
+				return b[1] - a[1];
+			});
+
+
+
 			res.render("projects", {
 				title: "All Projects",
 				user : req.user,
-				projects: returnProjects
+				projects: returnProjects,
+				tags: tags,
+				moment: moment
 			});
 		}
 	});
@@ -103,12 +139,12 @@ router.post("/new/", function(req, res, next) {
 					res.send("EEP!" + err)
 				} else {
 					res.status(201);
-					res.redirect("/projects/" + project.slug);
+					res.redirect("/" + project.slug);
 				}
 			});
 		}
 	} else {
-		res.redirect("/projects/");
+		res.redirect("/");
 	}
 });
 
@@ -188,7 +224,7 @@ router.post("/:projectSlug/edit/", function(req, res, next) {
 					res.status(500).send(err);
 				} else if (project) {
 					res.status(201);
-					res.redirect("/projects/" + project.slug + "/")
+					res.redirect("/" + project.slug + "/")
 				}
 			});
 		}
@@ -207,7 +243,7 @@ router.get("/:projectSlug/toggle/:state/", function(req, res, next) {
 			console.log("REQ: " + req.params.state);
 			console.log("PROJ: " + project.active)
 
-			res.redirect("/projects/")
+			res.redirect("/")
 			}
 		})
 	} else {
@@ -234,7 +270,7 @@ router.get("/:projectSlug/delete/", function(req, res, next) {
 			}
 		});
 	} else {
-		res.redirect("/projects/");
+		res.redirect("/");
 	}
 });
 
@@ -245,7 +281,7 @@ router.post("/:projectSlug/delete/yes-for-sure", function(req, res, next) {
 				res.status(500).send(err);
 			} else if (project) {
 				project.remove();
-				res.redirect("/projects/");
+				res.redirect("/");
 			}
 		});
 	} else {

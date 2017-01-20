@@ -6,7 +6,7 @@ block content
 		ul.status-list
 			each status in statuses
 				li
-					a( href="/projects/?status=" + status.name, class="status-tag-" + status.color).tag.status-list-tag #{status.name }
+					a( href="/?status=" + status.name, class="status-tag-" + status.color).tag.status-list-tag #{status.name }
 					a(href="/statuses/" + status.name + "/").admin-link ✂️ Edit
 					a(href="/statuses/" + status.name + "/delete").delete.admin-link  Delete
 

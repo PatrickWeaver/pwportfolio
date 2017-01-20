@@ -3,7 +3,7 @@ extends layout
 block content
 	h1=title
 
-	form(action="/projects/" + project.slug + "/images/order/", method="post", class="project-form")
+	form(action="/" + project.slug + "/images/order/", method="post", class="project-form")
 		for image in project.images
 			div.order-image
 				img(src=image.url)

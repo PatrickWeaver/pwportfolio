@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	a(href="/" + project.slug + "/") ⬅ Back to Project
+	h1= title
+
+	form( 
+		id="uploadForm" 
+		enctype="multipart/form-data" 
+		action="/" + project.slug + "/images/upload/" 
+		method="post"
+		class="col-xs-12 col-sm-offset-4 col-sm-4")
+
+		label File :
+		input(type="file" name="file")
+		label Cover?
+		input(type="checkbox" name="cover")
+		label Order:
+		input(type="number" name="order", value=project.images.length -1)#image-order-input
+		label Caption:
+		textarea(name="caption")
+		br
+		input(type="submit" value="Upload Image" name="submit")
