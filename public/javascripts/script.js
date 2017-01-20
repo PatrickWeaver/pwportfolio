@@ -32,3 +32,18 @@ checkSlug = function(slug) {
 	}
 	return newSlug;
 }
+
+filterToggle = function(){
+	filterToggleDiv = document.getElementById("filter-toggle");
+	if (filterToggleDiv.innerHTML === "🔀 Filter") {
+		filterToggleDiv.innerHTML = "❌ Filter";
+	} else {
+		filterToggleDiv.innerHTML = "🔀 Filter";
+	}
+	filter = document.getElementById("filter");
+		if (filter.style.display === "block"){
+			filter.style.display = "none";
+		} else {
+			filter.style.display = "block";
+		}
+	}

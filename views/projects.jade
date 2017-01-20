@@ -1,15 +1,24 @@
 extends layout
 
 block content
-	h1= title
-	h3 Filter by status:
-
-	h3 Filter by tag:
-	ul
-		each tag in tags
-			if tag != ""
-				a(href="/?tags=" + tag[0])
-					li.tag #{tag[0]}
+	div.page-header
+		h1= title
+		div(onclick="filterToggle()")#filter-toggle
+			|🔀 Filter
+		div#filter
+			h3 Filter by status:
+			ul
+				each status in statusesArray
+					if status != ""
+						li
+							a(href="/?status=" + status[0].name, class="status-tag-" + status[0].color ).tag=status[0].name
+			h3 Filter by tag:
+			ul
+				each tag in tags
+					if tag != ""
+						a(href="/?tags=" + tag[0])
+							li.tag=tag[0]
+		
 	div.projects
 		ul.project-list
 			each project, index in projects

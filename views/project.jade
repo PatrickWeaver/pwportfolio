@@ -15,7 +15,7 @@ block content
 
 		ul
 				li= "Status: "
-					a(href="/?status=" + project.status.name).tag #{project.status.name}
+					a(href="/?status=" + project.status.name, class="status-tag-" + project.status.color).tag #{project.status.name}
 				if project.startDate
 					li
 						if moment() >= project.startDate

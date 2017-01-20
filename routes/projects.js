@@ -45,6 +45,7 @@ router.get("/", function(req, res, next) {
 		} else {
 			var returnProjects = [];
 			tags = [];
+			statusesArray = [];
 			projects.forEach(function(project, index, array) {
 				pushProject = function(){
 					cover = findCover(project);
@@ -52,22 +53,30 @@ router.get("/", function(req, res, next) {
 					newProject.cover = cover;
 					returnProjects.push(newProject);
 				}
-				if (status){
-					if (status.toLowerCase() === project.status.name.toLowerCase()){
-						pushProject();
+				pushProject();
+
+				pushStatus = true;
+				for (i in statusesArray){
+					if (statusesArray[i][0].name === project.status.name){
+						statusesArray[i][1]++;
+						pushStatus = false;
 					}
-				} else {
-					pushProject();
 				}
+				if (pushStatus){
+					if (project.status.name != "") {
+						statusesArray.push([project.status, 1]);
+					}
+				}
+
 				for (t = 0; t < project.tags.length; t++){
-					push = true;
+					pushTag = true;
 					for (i in tags){
 						if (tags[i][0] === project.tags[t]){
-							tags[i][1]++
-							push = false;
+							tags[i][1]++;
+							pushTag = false;
 						}
 					}
-					if (push) {
+					if (pushTag) {
 						if (project.tags[t] != "") {
 							tags.push([project.tags[t], 1]);
 						}
@@ -75,6 +84,7 @@ router.get("/", function(req, res, next) {
 				}
 			});
 
+			// First sort alphabetically 
 			tags.sort(function(a,b) {
 				if (a[0] < b[0]){
 					return -1
@@ -82,14 +92,17 @@ router.get("/", function(req, res, next) {
 				if (a[0] > b[0]) {
 					return 1;
 				}
-
 				return 0;
-
 			});
-
+			// Then sort by number of times status appears
 			tags.sort(function(a, b) {
 				return b[1] - a[1];
 			});
+
+			for (status in statusesArray) {
+				console.log(status + ": " + statusesArray[status][0]);
+				console.log(status + ": " + statusesArray[status][1]);
+			}
 
 
 

@@ -4,6 +4,14 @@ link(rel="stylesheet", href="/stylesheets/flatpickr.css")
 
 if status
 	style= ".status-tag-" + status.color + " { background-color: #" + status.color + "; }"
+
 if statuses
 	for status in statuses
 		style= ".status-tag-" + status.color + " { background-color: #" + status.color + "; }"
+if project
+	if project.status.color
+		style= ".status-tag-" + project.status.color + " { background-color: #" + project.status.color + "; }"
+
+if statusesArray
+	for status in statusesArray
+		style= ".status-tag-" + status[0].color + " { background-color: #" + status[0].color + "; }"
