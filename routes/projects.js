@@ -34,8 +34,10 @@ router.get("/", function(req, res, next) {
 	if (req.query.tags){
 		query.tags = req.query.tags;
 	}
+	/* This isn't working for some reason */
 	if (req.query.status){
-		status = req.query.status;
+		status.name = req.query.status;
+		console.log("STATUS:")
 	}
 	Project.find(query)
 	.populate("status")
@@ -48,10 +50,19 @@ router.get("/", function(req, res, next) {
 			statusesArray = [];
 			projects.forEach(function(project, index, array) {
 				pushProject = function(){
-					cover = findCover(project);
-					var newProject = project.toJSON();
-					newProject.cover = cover;
-					returnProjects.push(newProject);
+					filter = true;
+					if (req.query.status) {
+						if (req.query.status != project.status.name){
+							filter = false;
+						}
+					}
+					if (filter) {
+						cover = findCover(project);
+						var newProject = project.toJSON();
+						newProject.cover = cover;
+						returnProjects.push(newProject);
+					}
+					
 				}
 				pushProject();
 
@@ -98,13 +109,6 @@ router.get("/", function(req, res, next) {
 			tags.sort(function(a, b) {
 				return b[1] - a[1];
 			});
-
-			for (status in statusesArray) {
-				console.log(status + ": " + statusesArray[status][0]);
-				console.log(status + ": " + statusesArray[status][1]);
-			}
-
-
 
 			res.render("projects", {
 				title: "All Projects",
