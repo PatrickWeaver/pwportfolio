@@ -5,7 +5,10 @@ var router = express.Router();
 
 
 router.get("/", function (req, res) {
-    res.render("u", { user : req.user });
+    res.render("u", {
+    	user : req.user,
+    	title: "User"
+    });
 });
 
 router.post("/", passport.authenticate("local"), function(req, res) {
@@ -13,11 +16,15 @@ router.post("/", passport.authenticate("local"), function(req, res) {
 });
 
 router.post("/new/", function(req, res) {
+	console.log("req.body.key: " + req.body.key);
+	console.log("process.env.KEY: " + process.env.KEY);
 	if (req.body.key === process.env.KEY) {
 		Account.register(new Account({ username: req.body.username }), req.body.password, function(err, account) {
 			if (err) {
 				console.log("Error: " + err);
-				return res.render("u", { account : account });
+				return res.render("u", {
+					account : account
+				});
 			}
 			passport.authenticate("local")(req, res, function() {
 				res.redirect("/");
@@ -28,7 +35,7 @@ router.post("/new/", function(req, res) {
 	}
 });
 
-router.post("/logout/", function(req, res) {
+router.get("/logout/", function(req, res) {
 	req.logout();
 	res.redirect("/");
 });
