@@ -17,10 +17,11 @@ a {
 ul, li {
 	list-style-type: none;
 	padding: 0;
+	margin: 0;
 }
 
 h3 {
-	margin: .5em 0;
+	margin: .25em 0;
 }
 
 .page-header {
@@ -35,6 +36,8 @@ h3 {
 
 #filter {
 	display: none;
+	background-color: #DFDFDF;
+	padding: .5em .5em;
 }
 
 #filter li {
@@ -43,9 +46,11 @@ h3 {
 
 #filter-toggle {
 	color: #00C0FF;
-	text-decoration: udnerline;
+	text-decoration: none;
 	font-size: 75%;
 	cursor: pointer;
+	line-height: 1em;
+	display: inline-block;
 }
 
 .tag {
@@ -55,6 +60,7 @@ h3 {
 	padding: .15em;
 	text-decoration: none;
 	border-radius: 3px;
+	color: #000000;
 }
 
 
@@ -125,8 +131,23 @@ li.list {
 
 
 /* Admin */
-input, textarea {
+input, textarea, select{
 	display: block;
+	margin: .25em;
+	font-size: 150%;
+}
+
+select {
+	width: auto;
+	padding: .5em;
+}
+
+textarea {
+	width: 100%;
+}
+
+label {
+	margin: .25em;
 }
 
 .admin-link {
@@ -157,6 +178,12 @@ input, textarea {
 	font-size: 50%;
 }
 
+.project-form {
+	width: 70%;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
 
 /* Error: */
 
@@ -171,6 +198,9 @@ input, textarea {
 
 	/* Global */
 
+	body {
+		font-size: 200%;
+	}
 
 
 

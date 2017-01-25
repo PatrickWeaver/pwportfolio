@@ -1,7 +1,8 @@
 extends layout
 
 block content
-	h1=title
+	div.page-header
+		h1=title
 
 	form(action="/" + project.slug + "/edit/", method="post", class="project-form")
 		label Name:
@@ -15,9 +16,9 @@ block content
 		label End Date:
 		input(type="text" placeholder="Select Date..", name="endDate", value=project.endDate).flatpickr
 		label Status:
-			select(name="status")
-				for status in statuses
-					option(value=status.id)=status.name
+		select(name="status")
+			for status in statuses
+				option(value=status.id)=status.name
 		label Tags:
 		input(type="text", name="tags", value=project.tags)
 		label Project URL:

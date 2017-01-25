@@ -1,7 +1,8 @@
 extends layout
 
 block content
-	h1 New Project
+	div.page-header
+		h1 New Project
 
 	form(action="/new/", method="post", class="project-form")
 		label Name:

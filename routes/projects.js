@@ -30,14 +30,13 @@ var imageRouter = express.Router({mergeParams: true});
 
 router.get("/", function(req, res, next) {
 	var query = {};
-	var status = "";
+	var status = {};
 	if (req.query.tags){
 		query.tags = req.query.tags;
 	}
 	/* This isn't working for some reason */
 	if (req.query.status){
 		status.name = req.query.status;
-		console.log("STATUS:")
 	}
 	Project.find(query)
 	.populate("status")
@@ -109,9 +108,21 @@ router.get("/", function(req, res, next) {
 			tags.sort(function(a, b) {
 				return b[1] - a[1];
 			});
+			filter = false;
+			title = "Projects with ";
+			if (query.tags) {
+				filter = true;
+				title += (query.tags + " tag:")
+			} else if (status.name) {
+				filter = true;
+				title += (status.name + " status:")
+			} else {
+				title = "All projects:"
+			}
 
 			res.render("projects", {
-				title: "All Projects",
+				title: title,
+				filter: filter,
 				user : req.user,
 				projects: returnProjects,
 				tags: tags,
