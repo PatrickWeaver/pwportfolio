@@ -32,7 +32,7 @@ router.get("/", function(req, res, next) {
 	var query = {};
 	var status = {};
 	if (req.query.tags){
-		query.tags = req.query.tags;
+		query.tags = req.query.tags.toLowerCase();
 	}
 	/* This isn't working for some reason */
 	if (req.query.status){
@@ -51,7 +51,7 @@ router.get("/", function(req, res, next) {
 				pushProject = function(){
 					filter = true;
 					if (req.query.status) {
-						if (req.query.status != project.status.name){
+						if (req.query.status.toLowerCase() != project.status.name.toLowerCase()){
 							filter = false;
 						}
 					}

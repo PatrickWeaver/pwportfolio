@@ -9,7 +9,7 @@ li.list-project
 				span #{project.name}
 		if project.status
 			li.project-status.list
-				a(href="/?status=" + project.status.name, class="status-tag-" + project.status.color ).tag #{project.status.name} 
+				a(href="/?status=" + project.status.name.toLowerCase(), class="status-tag-" + project.status.color ).tag #{project.status.name} 
 		if project.startDate
 			li.list= moment(project.startDate).format("YYYY")
 				if project.endDate
