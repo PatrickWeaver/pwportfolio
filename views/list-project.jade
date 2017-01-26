@@ -14,7 +14,7 @@ li.list-project
 			li.list= moment(project.startDate).format("YYYY")
 				if project.endDate
 					if String(moment(project.startDate).format("YYYY")) != String(moment(project.endDate).format("YYYY"))
-						| - #{moment(project.endDate).format("YYYY")}
+						|  - #{moment(project.endDate).format("YYYY")}
 		if project.tags
 			li.list
 				ul

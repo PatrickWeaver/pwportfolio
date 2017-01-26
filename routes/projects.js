@@ -94,6 +94,7 @@ router.get("/", function(req, res, next) {
 				}
 			});
 
+			// Sort list of all statuses:
 			// First sort alphabetically 
 			tags.sort(function(a,b) {
 				if (a[0] < b[0]){
@@ -119,6 +120,11 @@ router.get("/", function(req, res, next) {
 			} else {
 				title = "All projects:"
 			}
+
+			// Sort projects by start date:
+			returnProjects.sort(function(a,b) {
+				return b.startDate - a.startDate
+			});
 
 			res.render("projects", {
 				title: title,
