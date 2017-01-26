@@ -2,8 +2,8 @@ extends layout
 
 block content
 	div.error
-		h1= message
-		h2= error.status
+		h1.error-message= message
+		h2.error-status= error.status
 		pre #{error.stack}
 
 		p= params
