@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	h1=title
+	h1=subtitle
 
 	form(action="/" + project.slug + "/images/order/", method="post", class="project-form")
 		for image in project.images

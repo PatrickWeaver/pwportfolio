@@ -17,6 +17,8 @@ var validate = require("../helpers/validate");
 var general = require("../helpers/general");
 var md = require("marked");
 
+var globalTitle = "Patrick Weaver Portfolio -- ";
+
 imageRouter.get("/:imageOrder/make-cover", function(req,res,next) {
 	if (req.user){
 		Project.findOne({ slug: req.params.projectSlug }, function(err, project) {
@@ -80,7 +82,8 @@ imageRouter.get("/upload/", function(req, res, next) {
 				res.status(500).send(err);
 			} else if (project) {
 				res.render("image-upload", {
-					title: "Upload image",
+					subtitle: "Upload image",
+					title: globalTitle + "Upload image",
 					project: project
 				});
 			}
@@ -187,7 +190,8 @@ imageRouter.get("/order/", function(req, res, next) {
 				res.status(500).send(err);
 			} else if (project) {
 				res.render("image-order", {
-					title: "Image order: " + project.name,
+					subtitle: "Image order: " + project.name,
+					title: globalTitle + "Image order: " + project.name,
 					project: project
 				})
 			} else {
@@ -247,7 +251,8 @@ imageRouter.get("/:imageOrder/view/", function(req, res, next) {
 			image = project.images[parseInt(req.params.imageOrder)]
 			title = project.name
 			res.render("image", {
-				title: title,
+				subtitle: title,
+				title: globalTitle + title,
 				project: project,
 				image: image
 			});

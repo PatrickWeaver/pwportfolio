@@ -3,11 +3,14 @@ var passport = require("passport")
 var Account = require("../models/account");
 var router = express.Router();
 
+var globalTitle = "Patrick Weaver Portfolio -- ";
+
 
 router.get("/", function (req, res) {
     res.render("u", {
     	user : req.user,
-    	title: "User"
+    	subtitle: "User",
+    	title: globalTitle + "User"
     });
 });
 

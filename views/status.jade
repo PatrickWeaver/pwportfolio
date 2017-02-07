@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	h1= title
+	h1= subtitle
 		form(action="/statuses/" + status.name + "/edit", method="post", class="status-form")
 			label Name:
 			input(type="text", name="name", value=status.name)

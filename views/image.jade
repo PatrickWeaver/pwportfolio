@@ -3,12 +3,12 @@ extends layout
 block content
 	a(href="/" + project.slug + "/") ⬅ Back to Project
 
-	h1= title
+	h2= subtitle
 
 	img(src=image.url).full-image
 	
 	p=image.caption
-	p=image.order
-	p=image._id
 	if user
+		p="Image Order: " + image.order
+		p="Image Id: " + image._id
 		a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image

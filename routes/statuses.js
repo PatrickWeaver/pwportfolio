@@ -2,12 +2,15 @@ var express = require("express");
 var router = express.Router();
 var Status = require("../models/status");
 
+var globalTitle = "Patrick Weaver Portfolio -- ";
+
 
 router.get("/new/", function(req, res, next) {
 	if (req.user) {
 		res.render("status-new", {
 			user : req.user,
-			title: "New Status"
+			subtitle: "New Status",
+			title: globalTitle + "New Status"
 		})
 	} else {
 		next();
@@ -43,7 +46,8 @@ router.get("/:statusName", function(req, res, next) {
 				res.status(500).send(err);
 			} else if (status) {
 				res.render("status", {
-					title: status.name,
+					subtitle: status.name,
+					title: globalTitle + status.name,
 					user: req.user,
 					status: status
 				});
@@ -122,7 +126,8 @@ router.get("/", function(req, res, next) {
 					returnStatuses.push(newStatus);
 				});
 				res.render("statuses", {
-					title: "Project Statuses",
+					subtitle: "Project Statuses",
+					title: globalTitle + "Project Statuses",
 					user : req.user,
 					statuses: returnStatuses
 				});

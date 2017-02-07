@@ -20,6 +20,8 @@ var Project = require("./models/project");
 var Status = require("./models/status");
 var Account = require("./models/account");
 
+var globalTitle = "Patrick Weaver Portfolio -- ";
+
 
 // DB:
 var db;

@@ -25,6 +25,8 @@ moment().format();
 router.use("/:projectSlug/images/", imageRoutes);
 var imageRouter = express.Router({mergeParams: true});
 
+var globalTitle = "Patrick Weaver Portfolio -- ";
+
 
 /* GET projects listing. */
 
@@ -186,7 +188,8 @@ router.get("/", function(req, res, next) {
 			});
 
 			res.render("projects", {
-				title: title,
+				subtitle: title,
+				title: globalTitle + title,
 				filter: filter,
 				user : req.user,
 				projects: returnProjects,
@@ -205,9 +208,11 @@ router.get("/new/", function(req, res, next) {
 			if (err) {
 				res.status(500).send(err);
 			} else {
+
 				res.render("project-new", {
 					user : req.user,
-					title: "New Project",
+					subtitle: "New Project",
+					title: globalTitle + "New Project",
 					statuses: statuses
 				});
 			}
@@ -253,7 +258,8 @@ router.get("/:projectSlug", function(req, res, next) {
 				cover = findCover(project);
 
 				res.render("project", {
-					title: project.name,
+					subtitle: project.name,
+					title: globalTitle + project.name,
 					user: req.user,
 					project: project,
 					cover: cover,
@@ -282,7 +288,8 @@ router.get("/:projectSlug/edit/", function(req, res, next) {
 
 						res.render("edit-project", {
 							user: req.user,
-							title: "📝 Edit: " + project.name,
+							subtitle: "📝 Edit: " + project.name,
+							title: globalTitle + "Edit: " + project.name,
 							project: project,
 							statuses: statuses
 						})
@@ -356,7 +363,8 @@ router.get("/:projectSlug/delete/", function(req, res, next) {
 				cover = findCover(project);
 
 				res.render("delete-yes-for-sure", {
-					title: "🗑 Delete: " + project.name,
+					subtitle: "🗑 Delete: " + project.name,
+					title: globalTitle + "Delete: " + project.name,
 					user: req.user,
 					project: project,
 					cover: cover
