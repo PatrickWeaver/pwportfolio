@@ -155,15 +155,16 @@ router.get("/", function(req, res, next) {
 
 
 			filter = false;
-			title = "Projects with ";
+			title = "Projects ";
 			if (query.tags) {
 				filter = true;
-				title += (query.tags + " tag:")
+				title += ("with " + query.tags + " tag:")
 			} else if (status.name) {
 				filter = true;
-				title += (status.name + " status:")
+				title += ("with " + status.name + " status:")
 			} else if (year){
 				filter = true;
+				title += ("from " + year);
 			} else {
 				title = "All projects:"
 			}
