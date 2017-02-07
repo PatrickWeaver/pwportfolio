@@ -230,6 +230,9 @@ router.post("/new/", function(req, res, next) {
 		} else if (!req.body.slug) {
 			res.status(400);
 			res.send("Slug is required");
+		} else if (!req.body.status) {
+			res.status(400);
+			res.send("Status is required");
 		} else {
 			projectTemplate = checkProject(req.body);
 			project = new Project(projectTemplate);
