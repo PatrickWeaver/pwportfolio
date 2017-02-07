@@ -164,7 +164,7 @@ router.get("/", function(req, res, next) {
 				title += ("with " + status.name + " status:")
 			} else if (year){
 				filter = true;
-				title += ("from " + year);
+				title += ("from " + year + ":");
 			} else {
 				title = "All projects:"
 			}
