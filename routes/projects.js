@@ -34,6 +34,11 @@ router.get("/", function(req, res, next) {
 	if (req.query.tags){
 		query.tags = req.query.tags.toLowerCase();
 	}
+	if (req.query.year){
+		year = parseInt(req.query.year, 10);
+	} else {
+		year = "";
+	}
 	/* This isn't working for some reason */
 	if (req.query.status){
 		status.name = req.query.status;
@@ -47,15 +52,39 @@ router.get("/", function(req, res, next) {
 			var returnProjects = [];
 			tags = [];
 			statusesArray = [];
+			years = [];
 			projects.forEach(function(project, index, array) {
 				pushProject = function(){
-					filter = true;
+					includeProject = true;
+
+					// Filter by status
 					if (req.query.status) {
 						if (req.query.status.toLowerCase() != project.status.name.toLowerCase()){
-							filter = false;
+							includeProject = false;
 						}
 					}
-					if (filter) {
+
+
+					if (project.endDate){
+						end = project.endDate.getFullYear();
+					} else {
+						end = project.startDate.getFullYear();
+					}
+					if (year) {
+						if (includeProject) {
+							includeProject = false;
+							if (end >= year) {
+								for (i = project.startDate.getFullYear(); i <= end; i++){
+									if (i === year){
+										includeProject = true;
+										break
+									}
+								}
+							}
+						}		
+					}
+
+					if (includeProject) {
 						cover = findCover(project);
 						var newProject = project.toJSON();
 						newProject.cover = cover;
@@ -65,6 +94,7 @@ router.get("/", function(req, res, next) {
 				}
 				pushProject();
 
+				// Statuses for filter
 				pushStatus = true;
 				for (i in statusesArray){
 					if (statusesArray[i][0].name === project.status.name){
@@ -78,6 +108,7 @@ router.get("/", function(req, res, next) {
 					}
 				}
 
+				// Tags for filter
 				for (t = 0; t < project.tags.length; t++){
 					pushTag = true;
 					for (i in tags){
@@ -92,13 +123,25 @@ router.get("/", function(req, res, next) {
 						}
 					}
 				}
+
+				// Years for filter
+				if (project.startDate){
+					for (i = project.startDate.getFullYear(); i <= end; i++){
+						if (years.indexOf(i) === -1){
+							years.push(i);
+						}
+					}
+				}
+
+
+
 			});
 
 			// Sort list of all statuses:
 			// First sort alphabetically 
 			tags.sort(function(a,b) {
 				if (a[0] < b[0]){
-					return -1
+					return -1;
 				}
 				if (a[0] > b[0]) {
 					return 1;
@@ -109,6 +152,8 @@ router.get("/", function(req, res, next) {
 			tags.sort(function(a, b) {
 				return b[1] - a[1];
 			});
+
+
 			filter = false;
 			title = "Projects with ";
 			if (query.tags) {
@@ -117,9 +162,22 @@ router.get("/", function(req, res, next) {
 			} else if (status.name) {
 				filter = true;
 				title += (status.name + " status:")
+			} else if (year){
+				filter = true;
 			} else {
 				title = "All projects:"
 			}
+
+			// Sort Years
+			years.sort(function(a, b) {
+				if (a < b) {
+					return -1;
+				}
+				if (a > b) {
+					return 1;
+				}
+				return 0;
+			})
 
 			// Sort projects by start date:
 			returnProjects.sort(function(a,b) {
@@ -132,6 +190,7 @@ router.get("/", function(req, res, next) {
 				user : req.user,
 				projects: returnProjects,
 				tags: tags,
+				years: years,
 				moment: moment
 			});
 		}

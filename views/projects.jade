@@ -2,7 +2,7 @@ extends layout
 
 block content
 	div.page-header
-		h1= title
+		h2= title
 		if !filter
 			div(onclick="filterToggle()")#filter-toggle
 				|🔀 Filter
@@ -19,6 +19,12 @@ block content
 						if tag != ""
 							a(href="/?tags=" + tag[0])
 								li.tag=tag[0]
+				h3 Filter by year:
+				ul
+					each year in years
+						if year != ""
+							a(href="/?year=" + year)
+								li.tag=year
 		else
 			a(href="/")#filter-toggle ❌ Filter
 		

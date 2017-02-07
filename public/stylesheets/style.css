@@ -65,6 +65,12 @@ h3 {
 
 #main-header {
 	text-align: center;
+	text-decoration: none;
+	color: black;
+}
+
+#main-header h1 {
+	margin: 0;
 }
 
 
@@ -95,6 +101,10 @@ li.list {
 
 
 /* Project */
+
+.page-header h2 {
+	margin: 0;
+}
 
 .project-view-project-content {
 
@@ -140,7 +150,7 @@ li.list {
 	text-align: center;
 }
 
-.error h1, h2{
+.error h1, .error h2{
 	font-size: 400%;
 }
 
