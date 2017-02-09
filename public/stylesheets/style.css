@@ -73,15 +73,13 @@ h3 {
 	margin: 0;
 }
 
-
-
-/* Projects */
-
-.projects ul.project-list {
+.projects ul.project-list, .project-view-project-content {
 	width: 98%;
 	max-width: 1000px;
 	margin: 0 auto;
 }
+
+/* Projects */
 
 .list-project {
 	margin: 1em 3% 3em;
@@ -118,10 +116,6 @@ li.list {
 	margin: 0;
 }
 
-.project-view-project-content {
-
-}
-
 .project-view-project-content h1 {
 }
 
@@ -132,6 +126,7 @@ li.list {
 
 .project-view-project-cover {
 	max-height: 10em;
+	max-width: 100%;
 }
 
 /* different for below 480px */
