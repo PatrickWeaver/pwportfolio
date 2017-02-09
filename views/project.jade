@@ -10,8 +10,9 @@ block content
 
 		img(src=cover).project-view-project-cover
 		br
-		if cover
-			a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
+		if user
+			if cover
+				a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
 
 		ul
 				li= "Status: "
