@@ -99,6 +99,10 @@ li.list {
 	margin: .5em 0;
 }
 
+.description div p:first-child {
+	margin-top: 0;
+}
+
 .description ul {
 	padding: 0 0 0 1em;
 }
