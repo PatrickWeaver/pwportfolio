@@ -125,6 +125,10 @@ li.list {
 	text-align: center;
 }
 
+#navigation {
+	max-width: 1000px;
+}
+
 .project-view-project-cover {
 	max-height: 10em;
 	max-width: 100%;
