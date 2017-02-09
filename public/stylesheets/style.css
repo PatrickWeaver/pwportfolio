@@ -226,25 +226,26 @@ label {
 	font-size: 50%;
 }
 
-
-
-
 @media (max-width: 960px) {
 
 	/* Global */
 
 	body {
-		font-size: 200%;
+		font-size: 125%;
 	}
 
 
 
 	/* Projects */
 	.project-image {
-		max-width: 80%;
+		max-width: 95%;
 	}
 
 	/* Project */
 
 
 	/* Admin */
+}
+
+
+
