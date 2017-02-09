@@ -47,8 +47,9 @@ block content
 						a(href=project.sourceURL, target="_blank")= (project.sourceURL).substring((project.sourceURL).indexOf("//") + 2)
 				br
 				if project.description
-					li Description:
+					li.description Description:
 						div!= md(project.description)
+				br
 				if project.images
 					li
 						ul
