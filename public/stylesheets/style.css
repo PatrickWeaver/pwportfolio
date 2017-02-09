@@ -74,7 +74,7 @@ h3 {
 	margin: 0;
 }
 
-.projects ul.project-list, .project-view-project-content {
+.projects ul.project-list, .project-view-project-content, #navigation {
 	width: 98%;
 	max-width: 1000px;
 	margin: 0 auto;
@@ -123,10 +123,6 @@ li.list {
 .project-view-project-content img {
 	margin: 0 auto;
 	text-align: center;
-}
-
-#navigation {
-	max-width: 1000px;
 }
 
 .project-view-project-cover {
