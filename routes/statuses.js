@@ -69,16 +69,24 @@ router.post("/:statusName/edit/", function(req, res, next) {
 			res.status(400);
 			res.send("Color is required");
 		} else {
+			console.log("RECEIVED!");
 			parameters = {};
 			parameters.name = req.body.name;
 			parameters.color = req.body.color;
+			parameters._id = req.body._id;
+			for (p in parameters){
+				console.log(p + ": " + parameters[p]);
+			}
 
-			Status.findOneAndUpdate({ name: parameters.name }, parameters, { new: false }, function(err, status) {
+			Status.findOneAndUpdate({ _id: parameters._id }, parameters, function(err, status) {
 				if (err) {
 					res.status(500).send(err);
 				} else if (status) {
 					res.status(201);
 					res.redirect("/statuses/");
+				} else {
+					res.status(500);
+					res.send("Error");
 				}
 			});
 		}

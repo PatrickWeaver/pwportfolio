@@ -25,6 +25,10 @@ h3 {
 	margin: .25em 0;
 }
 
+.hidden {
+	display: none;
+}
+
 .page-header {
 	width: 98%;
 	max-width: 1000px;

@@ -322,7 +322,6 @@ router.post("/:projectSlug/edit/", function(req, res, next) {
 			res.send("Slug is required");
 		} else {
 			projectTemplate = checkProject(req.body);
-
 			Project.findOneAndUpdate({ slug: req.params.projectSlug }, projectTemplate, { new: true }, function(err, project) {
 				if (err) {
 					res.status(500).send(err);
