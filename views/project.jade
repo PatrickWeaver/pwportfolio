@@ -60,20 +60,23 @@ block content
 					li
 						ul
 							each image, index in project.images
-								li(id="image-" + index)
+								li(id="image-" + index).image-list
 									a(href="/" + project.slug + "/images/" + image.order + "/view/")
 										img(src=image.url).project-image
 									p=image.caption
 									if user
-										div.admin-image-details
-											p=image.order
-											p=image._id
-									if user
-										a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
-										if image.cover
-											a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
-										else
-											a(href="/" + project.slug + "/images/" + image.order + "/make-cover/").admin-link 🏗 Make Cover
+										ul.admin-image-details
+											li
+												p=image.order
+											li
+												p=image._id
+											li
+												a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
+											li
+												if image.cover
+													a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
+												else
+													a(href="/" + project.slug + "/images/" + image.order + "/make-cover/").admin-link 🏗 Make Cover
 		if user
 			a(href="/" + project.slug + "/edit/").admin-link 📝 Edit #{project.name}
 			a(href="/" + project.slug + "/images/upload/").admin-link ⬆ Upload Image
