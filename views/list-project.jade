@@ -1,36 +1,38 @@
 li.list-project
-	ul
-		li.list
-			if project.slug
-				- var url = project.slug;
-				a(href= "/" + url)
-					h3 #{project.name}
-			else
-				span #{project.name}
-		if project.status
-			li.project-status.list
-				a(href="/?status=" + project.status.name.toLowerCase(), class="status-tag-" + project.status.color ).tag #{project.status.name} 
-		if project.startDate
-			li.list= moment(project.startDate).format("YYYY")
-				if project.endDate
-					if String(moment(project.startDate).format("YYYY")) != String(moment(project.endDate).format("YYYY"))
-						|  - #{moment(project.endDate).format("YYYY")}
-		if project.tags
+	div.project-info
+		ul
 			li.list
-				ul
-					each tag in project.tags
-						if tag != ""
-							a(href="/?tags=" + tag)
-								li.tag #{tag}
-			if project.cover
+				if project.slug
+					- var url = project.slug;
+					a(href= "/" + url)
+						h3 #{project.name}
+				else
+					span #{project.name}
+			if project.status
+				li.project-status.list
+					a(href="/?status=" + project.status.name.toLowerCase(), class="status-tag-" + project.status.color ).tag #{project.status.name} 
+			if project.startDate
+				li.list= moment(project.startDate).format("YYYY")
+					if project.endDate
+						if String(moment(project.startDate).format("YYYY")) != String(moment(project.endDate).format("YYYY"))
+							|  - #{moment(project.endDate).format("YYYY")}
+			if project.tags
 				li.list
-					img(src=project.cover).list-cover
-			if user
-				li.list
-					a(href="/" + project.slug + "/edit/").admin-link 📝 Edit
-					a(href="/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
-					a(href="/" + project.slug + "/toggle/" + !project.active + "/").admin-link
-						if project.active
-							| 🔐 Deactivate
-						else
-							| 🔓 Activate
+					ul
+						each tag in project.tags
+							if tag != ""
+								a(href="/?tags=" + tag)
+									li.tag #{tag}
+	div.project-cover
+		if project.cover
+			img(src=project.cover)
+	if user
+		div.project-admin-links
+			li.list
+				a(href="/" + project.slug + "/edit/").admin-link 📝 Edit
+				a(href="/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
+				a(href="/" + project.slug + "/toggle/" + !project.active + "/").admin-link
+					if project.active
+						| 🔐 Deactivate
+					else
+						| 🔓 Activate
