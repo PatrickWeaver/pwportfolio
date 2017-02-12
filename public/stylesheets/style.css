@@ -92,6 +92,7 @@ h3 {
 
 .list-project div {
 	display: inline-block;
+	vertical-align:top;
 }
 
 li.list {
