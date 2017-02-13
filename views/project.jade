@@ -78,12 +78,18 @@ block content
 												else
 													a(href="/" + project.slug + "/images/" + image.order + "/make-cover/").admin-link 🏗 Make Cover
 		if user
-			a(href="/" + project.slug + "/edit/").admin-link 📝 Edit #{project.name}
-			a(href="/" + project.slug + "/images/upload/").admin-link ⬆ Upload Image
-			a(href="/" + project.slug + "/images/order/").admin-link 🔁 Change Image Order
-			a(href="/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
-			a(href="/" + project.slug + "/toggle/" + !project.active + "/").admin-link
-						if project.active
-							| 🔐 Deactivate
-						else
-							| 🔓 Activate
+			ul.project-admin-links
+			li
+				a(href="/" + project.slug + "/edit/").admin-link 📝 Edit #{project.name}
+			li
+				a(href="/" + project.slug + "/images/upload/").admin-link ⬆ Upload Image
+			li
+				a(href="/" + project.slug + "/images/order/").admin-link 🔁 Change Image Order
+			li
+				a(href="/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
+			li
+				a(href="/" + project.slug + "/toggle/" + !project.active + "/").admin-link
+							if project.active
+								| 🔐 Deactivate
+							else
+								| 🔓 Activate
