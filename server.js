@@ -53,7 +53,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(require("express-session")({
-  secret: "keyboard cat",
+  secret: "process.env.PASSPORT_SECRET_KEY",
   resave: false,
   saveUninitialized: false
 }));
