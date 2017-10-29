@@ -83,7 +83,7 @@ router.get("/", function(req, res, next) {
 									}
 								}
 							}
-						}		
+						}
 					}
 
 					if (includeProject) {
@@ -92,7 +92,7 @@ router.get("/", function(req, res, next) {
 						newProject.cover = cover;
 						returnProjects.push(newProject);
 					}
-					
+
 				}
 				pushProject();
 
@@ -140,7 +140,7 @@ router.get("/", function(req, res, next) {
 			});
 
 			// Sort list of all statuses:
-			// First sort alphabetically 
+			// First sort alphabetically
 			tags.sort(function(a,b) {
 				if (a[0] < b[0]){
 					return -1;
@@ -182,10 +182,31 @@ router.get("/", function(req, res, next) {
 				return 0;
 			})
 
-			// Sort projects by start date:
+			// Sort projects by end date:
 			returnProjects.sort(function(a,b) {
-				return b.startDate - a.startDate
+				return b.endDate - a.endDate;
 			});
+
+			// ** Put in progress projects at the top
+			// First remove them from the array
+			var inProgressProjects = [];
+			for (var i = 0; i < returnProjects.length; i++) {
+				// Remove projects with null end date, decrement i because array is shorter
+				if (returnProjects[i].endDate === null) {
+					inProgressProjects.push(returnProjects.splice(i, 1)[0]);
+					i--;
+				}
+			}
+
+			// Sort in progress projects backwards by start date
+			inProgressProjects.sort(function(a,b) {
+				return a.startDate - b.startDate;
+			})
+			// Put in progress projects one by one at the front of return projects
+			for (var i in inProgressProjects) {
+				project = inProgressProjects[i];
+				returnProjects.unshift(project);
+			}
 
 			res.render("projects", {
 				subtitle: title,
@@ -250,7 +271,7 @@ router.post("/new/", function(req, res, next) {
 	}
 });
 
-router.get("/:projectSlug", function(req, res, next) {	
+router.get("/:projectSlug", function(req, res, next) {
 	Project.findOne({ slug: req.params.projectSlug })
 	.populate("status")
 	.exec(function(err, project) {
