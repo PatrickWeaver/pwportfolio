@@ -26,8 +26,8 @@ block content
 							a(href="/?year=" + year)
 								li.tag=year
 		else
-			a(href="/")#filter-toggle ❌ Filter
-		
+			a(href="/")#filter-toggle ❌ Remove Filter
+
 	div.projects
 		ul.project-list
 			each project, index in projects
@@ -40,6 +40,3 @@ block content
 				each project in projects
 					if !project.active
 						include list-project
-
-		
-
