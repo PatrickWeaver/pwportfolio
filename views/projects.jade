@@ -12,12 +12,12 @@ block content
 					each status in statusesArray
 						if status != ""
 							li
-								a(href="/?status=" + status[0].name, class="status-tag-" + status[0].color ).tag=status[0].name
+								a(href="/?status=" + encodeURIComponent(status[0].name.toLowerCase().trim()), class="status-tag-" + status[0].color ).tag=status[0].name
 				h3 Filter by tag:
 				ul
 					each tag in tags
 						if tag != ""
-							a(href="/?tags=" + tag[0])
+							a(href="/?tags=" + encodeURIComponent(tag[0].toLowerCase().trim()))
 								li.tag=tag[0]
 				h3 Filter by year:
 				ul

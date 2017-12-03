@@ -7,7 +7,7 @@ li.list-project
 						h3 #{project.name}
 				if project.status
 					li.project-status.list
-						a(href="/?status=" + project.status.name.toLowerCase(), class="status-tag-" + project.status.color ).tag #{project.status.name}
+						a(href="/?status=" + encodeURIComponent(project.status.name.toLowerCase().trim()), class="status-tag-" + project.status.color ).tag #{project.status.name}
 				if project.startDate
 					li.list= moment(project.startDate).format("YYYY")
 						if project.endDate
@@ -18,7 +18,7 @@ li.list-project
 						ul
 							each tag in project.tags
 								if tag != ""
-									a(href="/?tags=" + tag)
+									a(href="/?tags=" + encodeURIComponent(tag.toLowerCase().trim()))
 										li.tag #{tag}
 		div.project-cover
 			if project.cover
