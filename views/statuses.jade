@@ -7,5 +7,5 @@ block content
 			each status in statuses
 				li
 					a( href="/?status=" + encodeURIComponent(status.name.toLowerCase().trim()), class="status-tag-" + status.color).tag.status-list-tag #{status.name }
-					a(href="/statuses/" + status.name + "/").admin-link ✂️ Edit
-					a(href="/statuses/" + status.name + "/delete").delete.admin-link  Delete
+					a(href="/statuses/" + encodeURIComponent(status.name.toLowerCase().trim()) + "/").admin-link ✂️ Edit
+					a(href="/statuses/" + encodeURIComponent(status.name.toLowerCase().trim()) + "/delete").delete.admin-link  Delete

@@ -18,7 +18,7 @@ li.list-project
 						ul
 							each tag in project.tags
 								if tag != ""
-									a(href="/?tags=" + encodeURIComponent(tag.toLowerCase().trim()))
+									a(href="/?tags=" + encodeURIComponent(tag.toLowerCase().trim())
 										li.tag #{tag}
 		div.project-cover
 			if project.cover

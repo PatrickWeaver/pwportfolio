@@ -17,21 +17,21 @@ block content
 
 		ul
 				li
-					strong Status: 
-					a(href="/?status=" + project.status.name.toLowerCase(), class="status-tag-" + project.status.color).tag #{project.status.name}
+					strong Status:
+					a(href="/?status=" + encodeURIComponent(project.status.name.toLowerCase().trim()), class="status-tag-" + project.status.color).tag #{project.status.name}
 				if project.startDate
 					li
 						if moment() >= project.startDate
-							strong Started: 
+							strong Started:
 						else
-							strong Scheduled to Start: 
+							strong Scheduled to Start:
 						|#{moment(project.startDate).format("MMM YYYY")}
 					if project.endDate
 						li
 							if moment() >= project.endDate
-								strong Ended: 
+								strong Ended:
 							else
-								strong Scheduled to End: 
+								strong Scheduled to End:
 							|#{moment(project.endDate).format("MMM YYYY")}
 				br
 				if project.tags
@@ -39,16 +39,16 @@ block content
 						ul
 							each tag in project.tags
 								if tag != ""
-									a(href="/?tags=" + tag)
+									a(href="/?tags=" + encodeURIComponent(tag.toLowerCase().trim())
 										li.tag #{tag}
 				br
 				if project.projectURL
 					li
-						strong Project URL: 
+						strong Project URL:
 						a(href=project.projectURL, target="_blank")= (project.projectURL).substring((project.projectURL).indexOf("//") + 2)
 				if project.sourceURL
 					li
-						strong Source URL: 
+						strong Source URL:
 						a(href=project.sourceURL, target="_blank")= (project.sourceURL).substring((project.sourceURL).indexOf("//") + 2)
 				br
 				if project.description
