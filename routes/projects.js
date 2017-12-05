@@ -42,9 +42,11 @@ router.get("/", function(req, res, next) {
 		year = "";
 	}
 	/* This isn't working for some reason */
+	/*
 	if (req.query.status){
 		status.name = req.query.status;
 	}
+	*/
 	Project.find(query)
 	.populate("status")
 	.exec(function(err, projects) {
@@ -61,7 +63,7 @@ router.get("/", function(req, res, next) {
 
 					// Filter by status
 					if (req.query.status) {
-						if (req.query.status.toLowerCase() != project.status.name.toLowerCase()){
+						if (req.query.status != project.status.slug){
 							includeProject = false;
 						}
 					}

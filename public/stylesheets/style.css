@@ -234,7 +234,7 @@ label {
 
 .color-demo {
 	width: 100px;
-	height: 100px;	
+	height: 100px;
 	/* Background color is inline in css.jade view */
 }
 
@@ -292,6 +292,3 @@ ul.admin-image-details li {
 
 	/* Admin */
 }
-
-
-

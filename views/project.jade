@@ -18,7 +18,7 @@ block content
 		ul
 				li
 					strong Status:
-					a(href="/?status=" + encodeURIComponent(project.status.name.toLowerCase().trim()), class="status-tag-" + project.status.color).tag #{project.status.name}
+					a(href="/?status=" + project.status.slug, class="status-tag-" + project.status.color).tag #{project.status.name}
 				if project.startDate
 					li
 						if moment() >= project.startDate

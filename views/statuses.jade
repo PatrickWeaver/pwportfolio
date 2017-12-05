@@ -6,6 +6,8 @@ block content
 		ul.status-list
 			each status in statuses
 				li
-					a( href="/?status=" + encodeURIComponent(status.name.toLowerCase().trim()), class="status-tag-" + status.color).tag.status-list-tag #{status.name }
-					a(href="/statuses/" + encodeURIComponent(status.name.toLowerCase().trim()) + "/").admin-link ✂️ Edit
-					a(href="/statuses/" + encodeURIComponent(status.name.toLowerCase().trim()) + "/delete").delete.admin-link  Delete
+					a( href="/?status=" + status.slug, class="status-tag-" + status.color).tag.status-list-tag #{status.name }
+					&nbsp; &nbsp;
+					a(href="/statuses/" + status.slug + "/").admin-link ✂️ Edit
+					&nbsp; &nbsp;
+					a(href="/statuses/" + status.slug + "/delete").delete.admin-link 🗑 Delete

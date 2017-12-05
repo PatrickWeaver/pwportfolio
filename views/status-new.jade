@@ -5,7 +5,10 @@ block content
 
 	form(action="/statuses/new/", method="post", class="status-form")
 		label Name:
-		input(type="text", name="name")
+		input(type="text", name="name", onkeyup="fillSlug()")#name-input
+		br
+		label Slug:
+		input(type="text", name="slug")#slug-input
 		br
 		label Color:
 		<input class="jscolor" value="000000" name="color">

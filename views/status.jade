@@ -5,7 +5,10 @@ block content
 	form(action="/statuses/" + status.name + "/edit", method="post", class="status-form")
 		input(type="text", name="_id", value=status.id).hidden
 		label Name:
-		input(type="text", name="name", value=status.name)
+		input(type="text", name="name", value=status.name, onkeyup="fillSlug()")#name-input
+		br
+		label Slug:
+		input(type="text", name="slug", value=status.slug)#slug-input
 		br
 		label Color:
 		input(class="jscolor", value=status.color, name="color")

@@ -6,9 +6,9 @@ $("#colorpicker").spectrum({
 */
 
 fillSlug = function() {
-	var name = document.getElementById("project-name-input");
+	var name = document.getElementById("name-input");
 	newSlug = checkSlug(name.value);
-	slug = document.getElementById("project-slug-input");
+	slug = document.getElementById("slug-input");
 	slug.value = newSlug;
 
 }

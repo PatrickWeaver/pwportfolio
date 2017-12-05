@@ -19,9 +19,9 @@ router.get("/new/", function(req, res, next) {
 
 router.post("/new/", function(req, res, next) {
 	if (req.user) {
-		if (!req.body.name) {
+		if (!req.body.name || !req.body.slug) {
 			res.status(400);
-			res.send("Name is required");
+			res.send("Name and slug are required");
 		} else if (!req.body.color) {
 			res.status(400);
 			res.send("Color is required");
@@ -29,6 +29,7 @@ router.post("/new/", function(req, res, next) {
 			parameters = {};
 			parameters.name = req.body.name;
 			parameters.color = req.body.color;
+			parameters.slug = req.body.slug;
 			status = new Status(parameters);
 			status.save();
 			res.status(201);
@@ -39,6 +40,29 @@ router.post("/new/", function(req, res, next) {
 	}
 })
 
+router.get("/:statusSlug", function(req, res, next) {
+	if (req.user){
+		Status.findOne({ slug: req.params.statusSlug }, function(err, status) {
+			if (err) {
+				res.status(500).send(err);
+			} else if (status) {
+				res.render("status", {
+					subtitle: status.name,
+					title: globalTitle + status.name,
+					user: req.user,
+					status: status
+				});
+			} else {
+				next();
+			}
+		});
+	} else {
+		next();
+	}
+});
+
+
+// This is a placeholder until all statuses have slugs
 router.get("/:statusName", function(req, res, next) {
 	if (req.user){
 		Status.findOne({ name: req.params.statusName }, function(err, status) {
@@ -62,16 +86,16 @@ router.get("/:statusName", function(req, res, next) {
 
 router.post("/:statusName/edit/", function(req, res, next) {
 	if (req.user) {
-		if (!req.body.name) {
+		if (!req.body.name || !req.body.slug) {
 			res.status(400);
-			res.send("Name is required");
+			res.send("Name and slug are required");
 		} else if (!req.body.color) {
 			res.status(400);
 			res.send("Color is required");
 		} else {
-			console.log("RECEIVED!");
 			parameters = {};
 			parameters.name = req.body.name;
+			parameters.slug = req.body.slug;
 			parameters.color = req.body.color;
 			parameters._id = req.body._id;
 			for (p in parameters){
