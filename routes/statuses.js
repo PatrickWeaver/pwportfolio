@@ -97,15 +97,15 @@ router.post("/:statusName/edit/", function(req, res, next) {
 	}
 });
 
-router.get("/:statusName/delete/", function(req, res, next) {
+router.get("/:statusSlug/delete/", function(req, res, next) {
 	if (req.user) {
-		if (!req.params.statusName) {
+		if (!req.params.statusSlug) {
 			res.status(400);
 			res.send("Name is required");
 		} else {
 			parameters = {};
-			parameters.name = req.params.statusName;
-			Status.findOne({ name: parameters.name }, function(err, status) {
+			parameters.slug = req.params.statusSlug;
+			Status.findOne({ name: parameters.slug }, function(err, status) {
 				if (err) {
 					res.status(500).send(err);
 				} else if (status) {
