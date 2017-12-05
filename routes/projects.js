@@ -72,7 +72,12 @@ router.get("/", function(req, res, next) {
 					if (project.endDate){
 						end = project.endDate.getFullYear();
 					} else {
-						end = project.startDate.getFullYear();
+						if (project.startDate){
+							end = project.startDate.getFullYear();
+						} else {
+							d = new Date;
+							end = d.getFullYear();
+						}
 					}
 					if (year) {
 						if (includeProject) {
