@@ -62,28 +62,6 @@ router.get("/:statusSlug", function(req, res, next) {
 });
 
 
-// This is a placeholder until all statuses have slugs
-router.get("/:statusName", function(req, res, next) {
-	if (req.user){
-		Status.findOne({ name: req.params.statusName }, function(err, status) {
-			if (err) {
-				res.status(500).send(err);
-			} else if (status) {
-				res.render("status", {
-					subtitle: status.name,
-					title: globalTitle + status.name,
-					user: req.user,
-					status: status
-				});
-			} else {
-				next();
-			}
-		});
-	} else {
-		next();
-	}
-});
-
 router.post("/:statusName/edit/", function(req, res, next) {
 	if (req.user) {
 		if (!req.body.name || !req.body.slug) {
