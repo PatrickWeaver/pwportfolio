@@ -194,6 +194,11 @@ router.get("/", function(req, res, next) {
 				return b.endDate - a.endDate;
 			});
 
+			for (var j in returnProjects) {
+				console.log(j)
+				console.log(returnProjects[j].name)
+			}
+
 
 			// ** Put in progress projects at the top
 			// First remove them from the array
