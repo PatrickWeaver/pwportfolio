@@ -115,6 +115,8 @@ li.list {
 	width: auto;
 	max-height: 15em;
 	max-width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 3px;
 }
 
 .description div p:first-child {
