@@ -200,6 +200,7 @@ router.get("/", function(req, res, next) {
 			var inProgressProjects = [];
 			var recentlyFinishedProjects = [];
 			for (var i = 0; i < returnProjects.length; i++) {
+				console.log(returnProjects[i].name);
 				// Remove recent projects:
 				var endDate = returnProjects[i].endDate;
 				console.log("End Date: " + endDate);
@@ -209,6 +210,9 @@ router.get("/", function(req, res, next) {
 					var nowMonth = now.getMonth();
 					var projectYear = endDate.getFullYear;
 					var projectMonth = endDate.getMonth();
+
+					console.log("Now: " + nowMonth + "/" + nowYear);
+					console.log("Project: " + projectMonth + "/" + projectYear);
 
 					// Check if project was completed in the last 3 months:
 					var pullToTop = true;
