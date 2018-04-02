@@ -208,7 +208,7 @@ router.get("/", function(req, res, next) {
 					var now = new Date();
 					var nowYear = now.getFullYear();
 					var nowMonth = now.getMonth();
-					var projectYear = endDate.getFullYear;
+					var projectYear = endDate.getFullYear();
 					var projectMonth = endDate.getMonth();
 					console.log("");
 
