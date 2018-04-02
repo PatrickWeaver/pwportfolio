@@ -194,24 +194,66 @@ router.get("/", function(req, res, next) {
 				return b.endDate - a.endDate;
 			});
 
+
 			// ** Put in progress projects at the top
 			// First remove them from the array
 			var inProgressProjects = [];
+			var recentlyFinishedProjects = [];
 			for (var i = 0; i < returnProjects.length; i++) {
-				// Remove projects with null end date, decrement i because array is shorter
-				if (returnProjects[i].endDate === null) {
+				// Remove recent projects:
+				var endDate = returnProjects[i].endDate;
+				console.log("End Date: " + endDate);
+				if (endDate != null) {
+					var now = new Date();
+					var nowYear = now.getFullYear();
+					var nowMonth = now.getMonth();
+					var projectYear = endDate.getFullYear;
+					var projectMonth = endDate.getMonth();
+
+					// Check if project was completed in the last 3 months:
+					var pullToTop = true;
+					if (nowYear - projectYear > 1) {
+						pullToTop = false;
+					} else if (nowYear === projectYear) {
+						if (nowMonth - projectMonth > 3) {
+							pullToTop = false;
+						}
+					} else {
+						if ((nowMonth + 11) - projectMonth > 3) {
+							pullToTop = false;
+						}
+					}
+
+					if (pullToTop) {
+						recentlyFinishedProjects.push(returnProjects.splice(i, 1)[0]);
+					}
+
+				}
+				else {
+					// Remove projects with null end date, decrement i because array is shorter
 					inProgressProjects.push(returnProjects.splice(i, 1)[0]);
 					i--;
 				}
 			}
 
+			// Sort recentlyFinishedProjects backwards by end date:
+			recentlyFinishedProjects.sort(function(a,b) {
+				return a.endDate - b.endDate;
+			})
+
 			// Sort in progress projects backwards by start date
+			// 🚸 Not sure if this already happened
 			inProgressProjects.sort(function(a,b) {
 				return a.startDate - b.startDate;
 			})
 			// Put in progress projects one by one at the front of return projects
 			for (var i in inProgressProjects) {
 				project = inProgressProjects[i];
+				returnProjects.unshift(project);
+			}
+
+			for (var i in recentlyFinishedProjects) {
+				project = recentlyFinishedProjects[i];
 				returnProjects.unshift(project);
 			}
 
