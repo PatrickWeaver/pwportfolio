@@ -210,6 +210,7 @@ router.get("/", function(req, res, next) {
 					var nowMonth = now.getMonth();
 					var projectYear = endDate.getFullYear;
 					var projectMonth = endDate.getMonth();
+					console.log("");
 
 					console.log("Now: " + nowMonth + "/" + nowYear);
 					console.log("Project: " + projectMonth + "/" + projectYear);
