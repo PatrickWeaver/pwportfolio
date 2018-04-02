@@ -236,6 +236,7 @@ router.get("/", function(req, res, next) {
 
 					if (pullToTop) {
 						recentlyFinishedProjects.push(returnProjects.splice(i, 1)[0]);
+						i--;
 					}
 
 				}
