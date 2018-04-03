@@ -16,13 +16,8 @@ if project
   if project.status.color
     if parseInt(project.status.color[0]) + parseInt(project.status.color[2]) + parseInt(project.status.color[4]) < 17
       style= ".status-tag-" + project.status.color + " { background-color: #" + project.status.color + "; }"
-      if project
-        if project.status
-          if project.status.color
-            if project.status.color == "000000"
-              style= ".status-tag-" + status.color + " { color: #FFFFFF; }"
-      else
-        
+      if project.status.color == "000000"
+        style= ".status-tag-" + project.status.color + " { color: #FFFFFF; }"
 
 if statusesArray
   for status in statusesArray
