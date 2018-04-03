@@ -3,24 +3,29 @@ link(rel="stylesheet", href="/stylesheets/spectrum.css")
 link(rel="stylesheet", href="/stylesheets/flatpickr.css")
 
 if status
-	style= ".status-tag-" + status.color + " { background-color: #" + status.color + "; }"
-	if parseInt(status.color[0]) + parseInt(status.color[2]) + parseInt(status.color[4]) < 17
-		style= ".status-tag-" + status.color + " { color: #FFFFFF; }"
+  style= ".status-tag-" + status.color + " { background-color: #" + status.color + "; }"
+  if parseInt(status.color[0]) + parseInt(status.color[2]) + parseInt(status.color[4]) < 17
+    style= ".status-tag-" + status.color + " { color: #FFFFFF; }"
 
 if statuses
-	for status in statuses
-		style= ".status-tag-" + status.color + " { background-color: #" + status.color + "; }"
-		if parseInt(status.color[0]) + parseInt(status.color[2]) + parseInt(status.color[4]) < 17
-			style= ".status-tag-" + status.color + " { color: #FFFFFF; }"
+  for status in statuses
+    style= ".status-tag-" + status.color + " { background-color: #" + status.color + "; }"
+    if parseInt(status.color[0]) + parseInt(status.color[2]) + parseInt(status.color[4]) < 17
+      style= ".status-tag-" + status.color + " { color: #FFFFFF; }"
 if project
-	if project.status.color
-		if parseInt(project.status.color[0]) + parseInt(project.status.color[2]) + parseInt(project.status.color[4]) < 17
-			style= ".status-tag-" + project.status.color + " { background-color: #" + project.status.color + "; }"
-			if project.status.color == "000000"
-				style= ".status-tag-" + status.color + " { color: #FFFFFF; }"
+  if project.status.color
+    if parseInt(project.status.color[0]) + parseInt(project.status.color[2]) + parseInt(project.status.color[4]) < 17
+      style= ".status-tag-" + project.status.color + " { background-color: #" + project.status.color + "; }"
+      if project
+        if project.status
+          if project.status.color
+            if project.status.color == "000000"
+              style= ".status-tag-" + status.color + " { color: #FFFFFF; }"
+      else
+        
 
 if statusesArray
-	for status in statusesArray
-		style= ".status-tag-" + status[0].color + " { background-color: #" + status[0].color + "; }"
-		if parseInt(status[0].color[0]) + parseInt(status[0].color[2]) + parseInt(status[0].color[4]) < 17
-			style= ".status-tag-" + status[0].color + " { color: #FFFFFF; }"
+  for status in statusesArray
+    style= ".status-tag-" + status[0].color + " { background-color: #" + status[0].color + "; }"
+    if parseInt(status[0].color[0]) + parseInt(status[0].color[2]) + parseInt(status[0].color[4]) < 17
+      style= ".status-tag-" + status[0].color + " { color: #FFFFFF; }"

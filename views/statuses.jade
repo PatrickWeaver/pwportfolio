@@ -1,13 +1,13 @@
 extends layout
 
 block content
-	h1= subtitle
-	div.statuses
-		ul.status-list
-			each status in statuses
-				li
-					a( href="/?status=" + status.slug, class="status-tag-" + status.color).tag.status-list-tag #{status.name }
-					&nbsp; &nbsp;
-					a(href="/statuses/" + status.slug + "/").admin-link ✂️ Edit
-					&nbsp; &nbsp;
-					a(href="/statuses/" + status.slug + "/delete").delete.admin-link 🗑 Delete
+  h1= subtitle
+  div.statuses
+    ul.status-list
+      each status in statuses
+        li
+          a( href="/?status=" + status.slug, class="status-tag-" + status.color).tag.status-list-tag #{status.name }
+          &nbsp; &nbsp;
+          a(href="/statuses/" + status.slug + "/").admin-link ✂️ Edit
+          &nbsp; &nbsp;
+          a(href="/statuses/" + status.slug + "/delete").delete.admin-link 🗑 Delete

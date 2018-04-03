@@ -1,38 +1,38 @@
 li.list-project
-	- var url = project.slug;
-		div.project-info
-			ul
-				li.list
-					a(href= "/" + url)
-						h3 #{project.name}
-				if project.status
-					li.project-status.list
-						a(href="/?status=" + project.status.slug, class="status-tag-" + project.status.color ).tag #{project.status.name}
-				if project.startDate
-					li.list= moment(project.startDate).format("YYYY")
-						if project.endDate
-							if String(moment(project.startDate).format("YYYY")) != String(moment(project.endDate).format("YYYY"))
-								|  - #{moment(project.endDate).format("YYYY")}
-				if project.tags
-					li.list
-						ul
-							each tag in project.tags
-								if tag != ""
-									a(href="/?tags=" + encodeURIComponent(tag.toLowerCase().trim()))
-										li.tag #{tag}
-		div.project-cover
-			if project.cover
-				a(href="/" + url)
-					img(src=project.cover)
-		if user
-			ul.project-admin-links
-				li
-					a(href="/" + project.slug + "/edit/").admin-link 📝 Edit
-				li
-					a(href="/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
-				li
-					a(href="/" + project.slug + "/toggle/" + !project.active + "/").admin-link
-						if project.active
-							| 🔐 Deactivate
-						else
-							| 🔓 Activate
+  - var url = project.slug;
+    div.project-info
+      ul
+        li.list
+          a(href= "/" + url)
+            h3 #{project.name}
+        if project.status
+          li.project-status.list
+            a(href="/?status=" + project.status.slug, class="status-tag-" + project.status.color ).tag #{project.status.name}
+        if project.startDate
+          li.list= moment(project.startDate).format("YYYY")
+            if project.endDate
+              if String(moment(project.startDate).format("YYYY")) != String(moment(project.endDate).format("YYYY"))
+                |  - #{moment(project.endDate).format("YYYY")}
+        if project.tags
+          li.list
+            ul
+              each tag in project.tags
+                if tag != ""
+                  a(href="/?tags=" + encodeURIComponent(tag.toLowerCase().trim()))
+                    li.tag #{tag}
+    div.project-cover
+      if project.cover
+        a(href="/" + url)
+          img(src=project.cover)
+    if user
+      ul.project-admin-links
+        li
+          a(href="/" + project.slug + "/edit/").admin-link 📝 Edit
+        li
+          a(href="/" + project.slug + "/delete/").delete.admin-link 🗑 Delete
+        li
+          a(href="/" + project.slug + "/toggle/" + !project.active + "/").admin-link
+            if project.active
+              | 🔐 Deactivate
+            else
+              | 🔓 Activate

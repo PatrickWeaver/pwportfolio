@@ -1,28 +1,28 @@
 extends layout
 
 block content
-	div.page-header
-		h1 New Project
+  div.page-header
+    h1 New Project
 
-	form(action="/new/", method="post", class="project-form")
-		label Name:
-		input(type="text", name="name", onkeyup="fillSlug()")#name-input
-		label Slug:
-		input(type="text", name="slug")#slug-input
-		label Description:
-		textarea(name="description")
-		label Start Date:
-		input(type="text" placeholder="Select Date..", name="startDate")#start-date-input.flatpickr
-		label End Date:
-		input(type="text" placeholder="Select Date..", name="endDate")#end-date-input.flatpickr
-		label Status:
-		select(name="status")
-			for status in statuses
-				option(value=status.id)=status.name
-		label Tags:
-		input(type="text", name="tags")
-		label Project URL:
-		input(type="text", name="projectURL")
-		label Source URL:
-		input(type="text", name="sourceURL")
-		button(type=submit) Submit
+  form(action="/new/", method="post", class="project-form")
+    label Name:
+    input(type="text", name="name", onkeyup="fillSlug()")#name-input
+    label Slug:
+    input(type="text", name="slug")#slug-input
+    label Description:
+    textarea(name="description")
+    label Start Date:
+    input(type="text" placeholder="Select Date..", name="startDate")#start-date-input.flatpickr
+    label End Date:
+    input(type="text" placeholder="Select Date..", name="endDate")#end-date-input.flatpickr
+    label Status:
+    select(name="status")
+      for status in statuses
+        option(value=status.id)=status.name
+    label Tags:
+    input(type="text", name="tags")
+    label Project URL:
+    input(type="text", name="projectURL")
+    label Source URL:
+    input(type="text", name="sourceURL")
+    button(type=submit) Submit

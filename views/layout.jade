@@ -1,25 +1,25 @@
 doctype html
 html
-	head
-		title=title
-		block css
-			include extras/css
-		meta(name="viewport" content="width=device-width, initial-scale=1.0")
-	body
-		a(href="/")#main-header
-			h1 Patrick Weaver Portfolio
-			br
-		if user
-			a(href="/u/logout/") Logout
-			br
-			a(href="/") Projects
-			|  // 
-			a(href="/new/") New Project
-			br
-			a(href="/statuses/") Statuses
-			|  // 
-			a(href="/statuses/new/") New Status
-			br
-		block content
-		block js
-			include extras/js
+  head
+    title=title
+    block css
+      include extras/css
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  body
+    a(href="/")#main-header
+      h1 Patrick Weaver Portfolio
+      br
+    if user
+      a(href="/u/logout/") Logout
+      br
+      a(href="/") Projects
+      |  // 
+      a(href="/new/") New Project
+      br
+      a(href="/statuses/") Statuses
+      |  // 
+      a(href="/statuses/new/") New Status
+      br
+    block content
+    block js
+      include extras/js

@@ -1,15 +1,15 @@
 extends layout
 
 block content
-	div#navigation
-		a(href="/" + project.slug + "/") ⬅ Back to Project
+  div#navigation
+    a(href="/" + project.slug + "/") ⬅ Back to Project
 
-	h2= subtitle
+  h2= subtitle
 
-	img(src=image.url).full-image
-	
-	p=image.caption
-	if user
-		p="Image Order: " + image.order
-		p="Image Id: " + image._id
-		a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
+  img(src=image.url).full-image
+  
+  p=image.caption
+  if user
+    p="Image Order: " + image.order
+    p="Image Id: " + image._id
+    a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image

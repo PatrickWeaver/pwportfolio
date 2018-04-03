@@ -1,28 +1,28 @@
 extends layout
 
 block content
-	div.page-header
-		h1=subtitle
+  div.page-header
+    h1=subtitle
 
-	form(action="/" + project.slug + "/edit/", method="post", class="project-form")
-		label Name:
-		input(type="text", name="name", value=project.name, onkeyup="fillSlug()")#name-input
-		label Slug:
-		input(type="text", name="slug", value=project.slug)#slug-input
-		label Description:
-		textarea(name="description")=project.description
-		label Start Date:
-		input(type="text" placeholder="Select Date..", name="startDate",  value=project.startDate).flatpickr
-		label End Date:
-		input(type="text" placeholder="Select Date..", name="endDate", value=project.endDate).flatpickr
-		label Status:
-		select(name="status")
-			for status in statuses
-				option(value=status.id)=status.name
-		label Tags:
-		input(type="text", name="tags", value=project.tags)
-		label Project URL:
-		input(type="text", name="projectURL", value=project.projectURL)
-		label Source URL:
-		input(type="text", name="sourceURL", value=project.sourceURL)
-		button(type=submit) Save
+  form(action="/" + project.slug + "/edit/", method="post", class="project-form")
+    label Name:
+    input(type="text", name="name", value=project.name, onkeyup="fillSlug()")#name-input
+    label Slug:
+    input(type="text", name="slug", value=project.slug)#slug-input
+    label Description:
+    textarea(name="description")=project.description
+    label Start Date:
+    input(type="text" placeholder="Select Date..", name="startDate",  value=project.startDate).flatpickr
+    label End Date:
+    input(type="text" placeholder="Select Date..", name="endDate", value=project.endDate).flatpickr
+    label Status:
+    select(name="status")
+      for status in statuses
+        option(value=status.id)=status.name
+    label Tags:
+    input(type="text", name="tags", value=project.tags)
+    label Project URL:
+    input(type="text", name="projectURL", value=project.projectURL)
+    label Source URL:
+    input(type="text", name="sourceURL", value=project.sourceURL)
+    button(type=submit) Save

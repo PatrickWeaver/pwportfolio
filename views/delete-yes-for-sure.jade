@@ -1,12 +1,12 @@
 extends layout
 
 block content
-	div#navigation
-		a(href="/" + project.slug) ⬅ Back to Project
+  div#navigation
+    a(href="/" + project.slug) ⬅ Back to Project
 
-	h1= title
+  h1= title
 
-	if user
+  if user
 
-		form(action="/" + project.slug + "/delete/yes-for-sure", method="post", class="delete-button-form")
-			input(type="submit" value="YES FOR SURE DELETE " + project.name name="submit")
+    form(action="/" + project.slug + "/delete/yes-for-sure", method="post", class="delete-button-form")
+      input(type="submit" value="YES FOR SURE DELETE " + project.name name="submit")

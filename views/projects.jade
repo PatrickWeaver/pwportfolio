@@ -1,42 +1,42 @@
 extends layout
 
 block content
-	div.page-header
-		h2=subtitle
-		if !filter
-			div(onclick="filterToggle()")#filter-toggle
-				|🔀 Filter
-			div#filter
-				h3 Filter by status:
-				ul
-					each status in statusesArray
-						if status != ""
-							li
-								a(href="/?status=" + status[0].slug, class="status-tag-" + status[0].color ).tag=status[0].name
-				h3 Filter by tag:
-				ul
-					each tag in tags
-						if tag != ""
-							a(href="/?tags=" + encodeURIComponent(tag[0].toLowerCase().trim()))
-								li.tag=tag[0]
-				h3 Filter by year:
-				ul
-					each year in years
-						if year != ""
-							a(href="/?year=" + year)
-								li.tag=year
-		else
-			a(href="/")#filter-toggle ❌ Remove Filter
+  div.page-header
+    h2=subtitle
+    if !filter
+      div(onclick="filterToggle()")#filter-toggle
+        |🔀 Filter
+      div#filter
+        h3 Filter by status:
+        ul
+          each status in statusesArray
+            if status != ""
+              li
+                a(href="/?status=" + status[0].slug, class="status-tag-" + status[0].color ).tag=status[0].name
+        h3 Filter by tag:
+        ul
+          each tag in tags
+            if tag != ""
+              a(href="/?tags=" + encodeURIComponent(tag[0].toLowerCase().trim()))
+                li.tag=tag[0]
+        h3 Filter by year:
+        ul
+          each year in years
+            if year != ""
+              a(href="/?year=" + year)
+                li.tag=year
+    else
+      a(href="/")#filter-toggle ❌ Remove Filter
 
-	div.projects
-		ul.project-list
-			each project, index in projects
-				if project.active
-					include list-project
+  div.projects
+    ul.project-list
+      each project, index in projects
+        if project.active
+          include list-project
 
-		if user
-			h3 Inactive Projects:
-			ul.project-list
-				each project in projects
-					if !project.active
-						include list-project
+    if user
+      h3 Inactive Projects:
+      ul.project-list
+        each project in projects
+          if !project.active
+            include list-project

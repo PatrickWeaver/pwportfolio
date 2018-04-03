@@ -1,13 +1,13 @@
 extends layout
 
 block content
-	h1=subtitle
+  h1=subtitle
 
-	form(action="/" + project.slug + "/images/order/", method="post", class="project-form")
-		for image in project.images
-			div.order-image
-				img(src=image.url)
-				input(type=number, name="images", value=image.order)
+  form(action="/" + project.slug + "/images/order/", method="post", class="project-form")
+    for image in project.images
+      div.order-image
+        img(src=image.url)
+        input(type=number, name="images", value=image.order)
 
 
-		button(type=submit) Save
+    button(type=submit) Save

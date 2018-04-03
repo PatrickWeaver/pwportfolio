@@ -1,24 +1,24 @@
 extends layout
 
 block content
-	if (!user)
-		h2 Log In:
-		form(action="/u/", method="post", class="u-form")
-			label Username:
-			input(type="text", name="username")
-			label Password:
-			input(type="password", name="password")
-			button(type="submit") Log In
-		br
-		br
-		h2 Register:
-		form(action="/u/new/", method="post", class="u-form")
-			label Username:
-			input(type="text", name="username")
-			label Password:
-			input(type="password", name="password")
-			label Key:
-			input(type="password", name="key")
-			button(type="submit") Register
-	else
-		|#{user.username}
+  if (!user)
+    h2 Log In:
+    form(action="/u/", method="post", class="u-form")
+      label Username:
+      input(type="text", name="username")
+      label Password:
+      input(type="password", name="password")
+      button(type="submit") Log In
+    br
+    br
+    h2 Register:
+    form(action="/u/new/", method="post", class="u-form")
+      label Username:
+      input(type="text", name="username")
+      label Password:
+      input(type="password", name="password")
+      label Key:
+      input(type="password", name="key")
+      button(type="submit") Register
+  else
+    |#{user.username}

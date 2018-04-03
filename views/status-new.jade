@@ -1,17 +1,17 @@
 extends layout
 
 block content
-	h1 New Status
+  h1 New Status
 
-	form(action="/statuses/new/", method="post", class="status-form")
-		label Name:
-		input(type="text", name="name", onkeyup="fillSlug()")#name-input
-		br
-		label Slug:
-		input(type="text", name="slug")#slug-input
-		br
-		label Color:
-		<input class="jscolor" value="000000" name="color">
-		br
-		br
-		button(type=submit) Submit
+  form(action="/statuses/new/", method="post", class="status-form")
+    label Name:
+    input(type="text", name="name", onkeyup="fillSlug()")#name-input
+    br
+    label Slug:
+    input(type="text", name="slug")#slug-input
+    br
+    label Color:
+    <input class="jscolor" value="000000" name="color">
+    br
+    br
+    button(type=submit) Submit
