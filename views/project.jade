@@ -18,19 +18,19 @@ block content
     
       ul.project-info-list
         li
-          strong Status:
+          strong Status: 
           a(href="/?status=" + project.status.slug, class="status-tag-" + project.status.color).tag #{project.status.name}
         if project.startDate
           li
             if moment() >= project.startDate
-              strong Started:
+              strong Started: 
             else
               strong Scheduled to Start:
             |#{moment(project.startDate).format("MMM YYYY")}
           if project.endDate
             li
               if moment() >= project.endDate
-                strong Ended:
+                strong Ended: 
               else
                 strong Scheduled to End:
               |#{moment(project.endDate).format("MMM YYYY")}
