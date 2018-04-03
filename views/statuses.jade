@@ -6,8 +6,10 @@ block content
     ul.status-list
       each status in statuses
         li
-          a( href="/?status=" + status.slug, class="status-tag-" + status.color).tag.status-list-tag #{status.name }
-          span(&nbsp; &nbsp;)
-          a(href="/statuses/" + status.slug + "/").admin-link ✂️ Edit
-          span(&nbsp; &nbsp;)
-          a(href="/statuses/" + status.slug + "/delete").delete.admin-link 🗑 Delete
+          ul.status-list-admin
+            li
+              a( href="/?status=" + status.slug, class="status-tag-" + status.color).tag.status-list-tag #{status.name }
+            li
+              a(href="/statuses/" + status.slug + "/").admin-link ✂️ Edit
+            li
+              a(href="/statuses/" + status.slug + "/delete").delete.admin-link 🗑 Delete

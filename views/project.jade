@@ -34,23 +34,21 @@ block content
               else
                 strong Scheduled to End:
               |#{moment(project.endDate).format("MMM YYYY")}
-        br
         if project.tags
           li
             ul
               each tag in project.tags
                 if tag != ""
                   a(href="/?tags=" + encodeURIComponent(tag.toLowerCase().trim()))
-                    li.tag #{tag}
-        br
+                    li.tag.secondary-tag #{tag}
         if project.projectURL
-          li
-            strong Project URL:
+          li.secondary-info
+            strong Project:
             br
             a(href=project.projectURL, target="_blank")= (project.projectURL).substring((project.projectURL).indexOf("//") + 2)
         if project.sourceURL
-          li
-            strong Source URL:
+          li.secondary-info
+            strong Source:
             br
             a(href=project.sourceURL, target="_blank")= (project.sourceURL).substring((project.sourceURL).indexOf("//") + 2)
 
