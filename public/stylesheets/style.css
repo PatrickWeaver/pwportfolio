@@ -154,6 +154,7 @@ li.list {
   width: 50%;
   display: inline-block;
   vertical-align: top;
+  line-height: 125%;
 }
 
 #project-info-left {
