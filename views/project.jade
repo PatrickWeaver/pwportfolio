@@ -58,9 +58,9 @@ block content
         br
         if project.images
           li
-            ul
+            ul.image-list
               each image, index in project.images
-                li(id="image-" + index).image-list
+                li(id="image-" + index).image-list-item
                   a(href="/" + project.slug + "/images/" + image.order + "/view/")
                     img(src=image.url).project-image
                   p=image.caption

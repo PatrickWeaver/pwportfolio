@@ -152,13 +152,17 @@ li.list {
 }
 
 .image-list {
-	display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-list-item {
 	width: 33.33%;
 	padding: 1em;
 	text-align: center;
 }
 
-.image-list a{
+.image-list-item a{
 }
 
 /* different for below 480px */
