@@ -45,11 +45,13 @@ block content
         br
         if project.projectURL
           li
-            strong Project URL: 
+            strong Project URL:
+            br
             a(href=project.projectURL, target="_blank")= (project.projectURL).substring((project.projectURL).indexOf("//") + 2)
         if project.sourceURL
           li
-            strong Source URL: 
+            strong Source URL:
+            br
             a(href=project.sourceURL, target="_blank")= (project.sourceURL).substring((project.sourceURL).indexOf("//") + 2)
 
     div#project-info-right.project-info-side
