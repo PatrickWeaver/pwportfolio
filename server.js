@@ -29,6 +29,9 @@ var db;
 if (process.env.ENV === "stag") {
   console.log("ENV is staging.");
   db = mongoose.connect(process.env.MONGODB_URI);
+} else if (process.env.ENV === "stagprod") {
+  console.log("ENV is staging with production db.");
+  db = mongoose.connect(process.env.PROD_MONGODB_URI);
 } else if (process.env.ENV === "prod") {
   console.log("ENV is production.");
   db = mongoose.connect(process.env.MONGODB_URI);

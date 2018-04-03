@@ -8,7 +8,7 @@
 body {
 	font-family: "Arial", sans-serif;
   padding: 10px 20px;
-  margin: 0;
+  margin: 2em 0;
   font-size: 150%;
 }
 
@@ -42,8 +42,10 @@ h3 {
 
 #filter {
 	display: none;
-	background-color: #DFDFDF;
+	background-color: #f0f0f0;
 	padding: .5em .5em;
+  margin:.5em 0;
+  border-radius: 5px;
 }
 
 #filter li {
@@ -51,7 +53,7 @@ h3 {
 }
 
 #filter .filter-tag {
-  background-color: #eee;
+  background-color: #fbfbfb;
 }
 
 #filter-toggle {
@@ -73,6 +75,17 @@ h3 {
 	color: #000000;
 }
 
+.secondary-tag {
+  color: #444;
+  border: 1px solid #444;
+}
+
+.secondary-info {
+  color: #444;
+  font-size: 80%;
+  line-height: 100%;
+}
+
 #main-header {
 	text-align: center;
 	text-decoration: none;
@@ -92,7 +105,7 @@ h3 {
 /* Projects */
 
 .list-project {
-	margin: 1em 3% 1.5em;
+	margin: 1em 0 1.5em;
 }
 
 .list-project div {
@@ -120,7 +133,7 @@ li.list {
 	max-height: 15em;
 	max-width: 100%;
 	border: 1px solid #ddd;
-	border-radius: 3px;
+  box-shadow: -5px 5px 1px #eee;
 }
 
 .description div p:first-child {
@@ -146,7 +159,7 @@ li.list {
 }
 
 .project-view-project-content img {
-	margin: 0 auto;
+	margin: 0 auto .5em;
 	text-align: center;
 }
 
@@ -162,11 +175,14 @@ li.list {
 }
 
 #project-info-left li {
+  margin-top: .25em;
 }
 
 .project-view-project-cover {
-	max-height: 10em;
+	max-height: 20em;
 	max-width: 100%;
+  border: 1px solid #ddd;
+  box-shadow: -5px 5px 1px #eee;
 }
 
 #project-info-right {
@@ -175,6 +191,7 @@ li.list {
 }
 
 .image-list {
+  margin-top: 1em;
   display: flex;
   flex-wrap: wrap;
 }
@@ -281,6 +298,10 @@ ul.admin-image-details li {
 	margin: 0 auto;
 }
 
+ul.status-list-admin li {
+  margin: 0 10px;
+  display: inline-block;
+
 
 /* Error: */
 
@@ -337,8 +358,6 @@ ul.admin-image-details li {
     max-height: none;
     width: 100%;
   }
-
-
 
   .image-list-item {
     width: 100%;

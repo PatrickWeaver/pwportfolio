@@ -3,6 +3,9 @@
   "version": "0.1.1",
   "description": "A portfolio website for Patrick Weaver",
   "main": "server.js",
+    "scripts": {
+    "start": "node server.js"
+  },
   "private": true,
   "dependencies": {
     "aws-sdk": "^2.7.21",
