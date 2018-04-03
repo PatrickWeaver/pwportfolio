@@ -6,16 +6,17 @@ block content
     a(href="/") ⬅ Projects
 
   div.project-view-project-content
+    div#project-info-left.project-info-side
+      h2=subtitle
 
-    h2=subtitle
-
-    img(src=cover).project-view-project-cover
-    br
-    if user
-      if cover
-        a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
-
-    ul.project-info-list
+      img(src=cover).project-view-project-cover
+      br
+      if user
+        if cover
+          a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
+        
+    
+      ul.project-info-list
         li
           strong Status:
           a(href="/?status=" + project.status.slug, class="status-tag-" + project.status.color).tag #{project.status.name}
@@ -44,39 +45,40 @@ block content
         br
         if project.projectURL
           li
-            strong Project URL:
+            strong Project URL: 
             a(href=project.projectURL, target="_blank")= (project.projectURL).substring((project.projectURL).indexOf("//") + 2)
         if project.sourceURL
           li
-            strong Source URL:
+            strong Source URL: 
             a(href=project.sourceURL, target="_blank")= (project.sourceURL).substring((project.sourceURL).indexOf("//") + 2)
-        br
+
+    div#project-info-right.project-info-side
+      ul.project-info-list
         if project.description
           li.description
             strong Description:
             div!= md(project.description)
         br
-        if project.images
-          li
-            ul.image-list
-              each image, index in project.images
-                li(id="image-" + index).image-list-item
-                  a(href="/" + project.slug + "/images/" + image.order + "/view/")
-                    img(src=image.url).project-image
-                  p=image.caption
-                  if user
-                    ul.admin-image-details
-                      li
-                        p=image.order
-                      li
-                        p=image._id
-                      li
-                        a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
-                      li
-                        if image.cover
-                          a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
-                        else
-                          a(href="/" + project.slug + "/images/" + image.order + "/make-cover/").admin-link 🏗 Make Cover
+    if project.images
+      ul.image-list
+        each image, index in project.images
+          li(id="image-" + index).image-list-item
+            a(href="/" + project.slug + "/images/" + image.order + "/view/")
+              img(src=image.url).project-image
+            p=image.caption
+            if user
+              ul.admin-image-details
+                li
+                  p=image.order
+                li
+                  p=image._id
+                li
+                  a(href="/" + project.slug + "/images/" + image.order + "/delete/").delete.admin-link 🗑 Delete Image
+                li
+                  if image.cover
+                    a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
+                  else
+                    a(href="/" + project.slug + "/images/" + image.order + "/make-cover/").admin-link 🏗 Make Cover
     if user
       ul.project-admin-links
       li

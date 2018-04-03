@@ -146,9 +146,27 @@ li.list {
 	text-align: center;
 }
 
+.project-info-side {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#project-info-left {
+  padding-right: .5em;
+}
+
+#project-info-left li {
+}
+
 .project-view-project-cover {
 	max-height: 10em;
 	max-width: 100%;
+}
+
+#project-info-right {
+  padding-left: .5em;
+  margin-top: 4em;
 }
 
 .image-list {
@@ -303,6 +321,10 @@ ul.admin-image-details li {
 
   .project-view-project-content > h2 {
     text-align: center;
+  }
+
+  .project-info-side {
+    width: 100%;
   }
 
   .project-view-project-cover {
