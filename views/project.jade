@@ -15,7 +15,7 @@ block content
       if cover
         a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
 
-    ul
+    ul.project-info-list
         li
           strong Status:
           a(href="/?status=" + project.status.slug, class="status-tag-" + project.status.color).tag #{project.status.name}
