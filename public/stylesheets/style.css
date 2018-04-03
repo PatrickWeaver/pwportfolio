@@ -6,10 +6,12 @@
 }
 
 body {
-	font-family: "Arial", sans-serif;
+	/*font-family: "Arial", sans-serif;*/
   padding: 10px 20px;
   margin: 2em 0;
   font-size: 150%;
+  font-family: 'Yantramanav', sans-serif;
+
 }
 
 a {
