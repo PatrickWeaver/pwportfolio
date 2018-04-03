@@ -18,13 +18,13 @@ block content
           each tag in tags
             if tag != ""
               a(href="/?tags=" + encodeURIComponent(tag[0].toLowerCase().trim()))
-                li.tag=tag[0]
+                li.tag.filter-tag=tag[0]
         h3 Filter by year:
         ul
           each year in years
             if year != ""
               a(href="/?year=" + year)
-                li.tag=year
+                li.tag.filter-tag=year
     else
       a(href="/")#filter-toggle ❌ Remove Filter
 

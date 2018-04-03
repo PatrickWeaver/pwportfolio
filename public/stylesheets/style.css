@@ -50,6 +50,10 @@ h3 {
 	display: inline-block;
 }
 
+#filter .filter-tag {
+  background-color: #eee;
+}
+
 #filter-toggle {
 	color: #00C0FF;
 	text-decoration: none;
