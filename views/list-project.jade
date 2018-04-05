@@ -3,8 +3,9 @@ li.list-project
     div.project-info
       ul
         li.list
-          a(href= "/" + url)
-            h3 #{project.name}
+          h3
+            a(href= "/" + url)
+              |#{project.name}
         if project.status
           li.project-status.list
             a(href="/?status=" + project.status.slug, class="status-tag-" + project.status.color ).tag #{project.status.name}
