@@ -9,14 +9,16 @@ block content
     div#project-info-left.project-info-side
       h2=subtitle
 
-      img(src=cover).project-view-project-cover
-      br
+
       if user
         if cover
           a(href="/" + project.slug + "/images/remove-cover/").admin-link ✂️ Remove Cover
         
     
       ul.project-info-list
+       if project.description
+          li.description
+            div!= md(project.description)
         li
           strong Status: 
           a(href="/?status=" + project.status.slug, class="status-tag-" + project.status.color style="background-color: #" + project.status.color).tag #{project.status.name}
@@ -53,11 +55,8 @@ block content
             a(href=project.sourceURL, target="_blank")= (project.sourceURL).substring((project.sourceURL).indexOf("//") + 2)
 
     div#project-info-right.project-info-side
-      ul.project-info-list
-        if project.description
-          li.description
-            div!= md(project.description)
-        br
+      img(src=cover).project-view-project-cover
+      br
     if project.images
       ul.image-list
         each image, index in project.images
